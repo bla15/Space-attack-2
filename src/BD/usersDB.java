@@ -2,29 +2,31 @@ package BD;
 
 import java.sql.*;
 
+import javax.swing.JOptionPane;
+
 public class usersDB {
 	// TODO Auto-generated method stub
 			String url ="jdbc:mysql://localhost:3306/";
 			String user = "root";
 			String password = "root";
+			public Connection con;
 			
 	public void conectarBD(){
 		try {
 			
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			Connection con= DriverManager.getConnection(url, user, password);
+			con = DriverManager.getConnection(url, user, password);
 			
 			//enlazamos con la BD
 			Statement stt = con.createStatement();
 			stt.execute("USE tfg_db");
-			
 			
 			//add some entries
 			stt.execute("INSERT INTO zzz (nick, date) VALUES"+
 					"('ressss', '2016-10-01 00:00:00') ");
 			//add some entries
 			stt.execute("INSERT INTO users (nick, email, password, role, pais, created_at, updated_at) VALUES"+
-					"('prueba','reees', 'aaaaa', 'aaaaa', 'Spain','2016-10-01 00:00:00', '2016-10-01 00:00:00' ) ");
+					"('Juan','juan', 'aaaaa', 'administrador', 'Spain','2016-10-01 00:00:00', '2016-10-01 00:00:00' ) ");
 			
 			
 		} catch (Exception e) {
@@ -32,7 +34,28 @@ public class usersDB {
 		}
 		System.out.println("conecto");
 	}
-	
+	public void loggingBD(String nick, String pass){
+		String cap="";
+		String sql = "SELECT * FROM users WHERE nick='"+nick+"' && password='"+pass+"'";
+		try {
+			Statement stt = con.createStatement();
+			ResultSet res = stt.executeQuery(sql);
+			while(res.next()){
+				cap = res.getString("role");
+			}
+			if(cap.equals("administrador")){
+				JOptionPane.showMessageDialog(null, "administrado");
+			}else if(cap.equals("usuario")){
+				JOptionPane.showMessageDialog(null, "cliente");
+			}else{
+				JOptionPane.showMessageDialog(null, "ERROR");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	public void desconectarDB(){
 		
 	}

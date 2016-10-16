@@ -10,7 +10,7 @@ public class start {
 
 	private JFrame frame;
 	
-	usersDB conectarDBUsers = new usersDB();
+	
 
 	/**
 	 * Launch the application.
@@ -34,7 +34,6 @@ public class start {
 	 * Create the application.
 	 */
 	public start() {
-		conectarDBUsers.conectarBD();
 		initialize();
 	}
 
