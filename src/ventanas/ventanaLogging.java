@@ -24,6 +24,7 @@ import java.net.URISyntaxException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
 import javax.swing.JPanel;
@@ -85,6 +86,7 @@ public class ventanaLogging implements KeyListener, ActionListener {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setUndecorated(true);
 		frame.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
+		((JComponent) frame.getContentPane()).setBorder(new LineBorder(Color.BLUE, 3));
 		frame.setSize(700,450); 
 		frame.setBounds( (ancho/2)-frame.getWidth()/2, (alto/2)-frame.getHeight()/2, 700,450);
 		frame.setResizable(false); 
@@ -97,7 +99,7 @@ public class ventanaLogging implements KeyListener, ActionListener {
 		
 		logicaFondos fotoSolLogging = new logicaFondos("/imagenes/sol.png");
 		fotoSolLogging.setSize(200,150);
-		fotoSolLogging.setBounds(0, 0, 200, 150);
+		fotoSolLogging.setBounds(3, 3, 200, 150);
 		frame.getContentPane().add(fotoSolLogging);
 		
 		JPanelGradient panelCentral = new  JPanelGradient();
@@ -162,7 +164,19 @@ public class ventanaLogging implements KeyListener, ActionListener {
 		if (e.getSource()==btnEntrar) {
 			String nick = textNick.getText();
 			String password = new String(textPass.getPassword());
-			conectarDBUsers.loggingBD(nick, password);
+			if(conectarDBUsers.loggingBD(nick, password)){
+				this.window.frame.dispose();
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							ventanaVideoPresent.window = new ventanaVideoPresent();
+							ventanaVideoPresent.window.frame.setVisible(true);		
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});	
+			}
 		}else if(e.getSource()==btnRegistrarse){
 			 try {
 

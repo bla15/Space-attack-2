@@ -22,11 +22,9 @@ public class usersDB {
 			stt.execute("USE tfg_db");
 			
 			//add some entries
-			stt.execute("INSERT INTO zzz (nick, date) VALUES"+
-					"('ressss', '2016-10-01 00:00:00') ");
+			//stt.execute("INSERT INTO zzz (nick, date) VALUES"+"('ressss', '2016-10-01 00:00:00') ");
 			//add some entries
-			stt.execute("INSERT INTO users (nick, email, password, role, pais, created_at, updated_at) VALUES"+
-					"('Juan','juan', 'aaaaa', 'administrador', 'Spain','2016-10-01 00:00:00', '2016-10-01 00:00:00' ) ");
+			//stt.execute("INSERT INTO users (nick, email, password, role, pais, created_at, updated_at) VALUES"+ "('Juan','juan', 'aaaaa', 'administrador', 'Spain','2016-10-01 00:00:00', '2016-10-01 00:00:00' ) ");
 			
 			
 		} catch (Exception e) {
@@ -34,7 +32,7 @@ public class usersDB {
 		}
 		System.out.println("conecto");
 	}
-	public void loggingBD(String nick, String pass){
+	public boolean loggingBD(String nick, String pass){
 		String cap="";
 		String sql = "SELECT * FROM users WHERE nick='"+nick+"' && password='"+pass+"'";
 		try {
@@ -43,17 +41,16 @@ public class usersDB {
 			while(res.next()){
 				cap = res.getString("role");
 			}
-			if(cap.equals("administrador")){
-				JOptionPane.showMessageDialog(null, "administrado");
-			}else if(cap.equals("usuario")){
-				JOptionPane.showMessageDialog(null, "cliente");
-			}else{
+			if(!cap.equals("usuario")&&(!cap.equals("administrador"))){
 				JOptionPane.showMessageDialog(null, "ERROR");
+				return false;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		return true;
 	}
 
 	public void desconectarDB(){

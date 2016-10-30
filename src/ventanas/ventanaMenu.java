@@ -4,24 +4,19 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
-import BD.usersDB;
+public class ventanaMenu {
 
-public class start {
-
-	private JFrame frame;
-	
-	
+	public JFrame frame;
+	public static ventanaMenu window;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		
-		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					start window = new start();
+					window = new ventanaMenu();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -33,7 +28,7 @@ public class start {
 	/**
 	 * Create the application.
 	 */
-	public start() {
+	public ventanaMenu() {
 		initialize();
 	}
 
