@@ -3,16 +3,12 @@ package ventanas;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JRootPane;
 import javax.swing.border.LineBorder;
-
 import logicaVentanas.JPanelGradient;
 import logicaVentanas.logicaFondos;
-
 import javax.swing.JLabel;
-
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,13 +17,12 @@ import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
-import javax.swing.JPanel;
+
 import javax.swing.JTextField;
 
 import BD.usersDB;
@@ -165,7 +160,7 @@ public class ventanaLogging implements KeyListener, ActionListener {
 			String nick = textNick.getText();
 			String password = new String(textPass.getPassword());
 			if(conectarDBUsers.loggingBD(nick, password)){
-				this.window.frame.dispose();
+				window.frame.dispose();
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
