@@ -83,7 +83,7 @@ public class ventanaVideoPresent implements KeyListener, ActionListener{
                     //se añade video al jfxPanel
                     jfxPanel.setScene(new Scene(new Group(new MediaView(oracleVid))));  
                     oracleVid.setVolume(0.7);//volumen
-                    //oracleVid.setCycleCount(MediaPlayer.INDEFINITE);//repite video
+                    oracleVid.setCycleCount(MediaPlayer.INDEFINITE);//repite video
                     oracleVid.play();//play video
       
                  
@@ -162,6 +162,7 @@ public class ventanaVideoPresent implements KeyListener, ActionListener{
 				//System.out.println("SUII");
 				
 				window.frame.dispose();
+				
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
@@ -171,7 +172,8 @@ public class ventanaVideoPresent implements KeyListener, ActionListener{
 							e.printStackTrace();
 						}
 					}
-				});	
+				});
+				
 			}
 		}
 	}
