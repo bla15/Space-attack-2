@@ -26,7 +26,7 @@ public class ventanaMenu implements KeyListener, ActionListener{
 	
 	private logicaFondos panelFondo;
 	private logicaFondos asteroide1;
-	private logicaFondos asteroide2;
+	
 	
 	private int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
     private int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
