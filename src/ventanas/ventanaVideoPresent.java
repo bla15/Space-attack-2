@@ -9,9 +9,12 @@ import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
+
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JRootPane;
+import javax.swing.SwingUtilities;
+
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Group;
@@ -19,6 +22,7 @@ import javafx.scene.Scene;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+
 import javax.swing.BoxLayout;
 import javax.swing.border.LineBorder;
 
@@ -26,8 +30,12 @@ public class ventanaVideoPresent implements KeyListener, ActionListener{
 
 	public JFrame frame;
 	public static ventanaVideoPresent window;
-	private final JFXPanel jfxPanel = new JFXPanel();  
+	
+	private JFXPanel jfxPanel = new JFXPanel();  
+	private Media file ;
 	private MediaPlayer oracleVid;
+	
+	private boolean continuar = true;
 	
 	/**
 	 * Launch the application.
@@ -72,11 +80,12 @@ public class ventanaVideoPresent implements KeyListener, ActionListener{
         Platform.runLater(new Runnable() {
              @Override
              public void run() {   
+            	 System.out.println("1111111111");
             	 //File rutaVideo = new File ("/archivos/r.mp4");
             	 //System.out.println("La ruta del fichero es: " + getClass().getResource("/archivos/r.mp4"));
             	 //System.out.println(System.getProperty("user.dir"));
                 //File filestring  = new File("C:\\proyectos Java\\TFG-ing\\space.attack.2\\src\\archivos\\z.mp4");  
-                Media file = new Media(new File("src\\archivos\\videos\\videoPresentacion.mp4").toURI().toString());    
+            	 file = new Media(new File("videos\\videoPresentacion.mp4").toURI().toString());    
                 oracleVid = new MediaPlayer(file);
                 oracleVid.onReadyProperty();
                   
@@ -130,29 +139,55 @@ public class ventanaVideoPresent implements KeyListener, ActionListener{
 		// TODO Auto-generated method stub
 		if(e.getKeyCode()==KeyEvent.VK_ENTER){
 			
+			oracleVid.stop();
+			oracleVid.dispose();
+			oracleVid = null ;
+			jfxPanel = null ;
+
 			window.frame.dispose();
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
 						ventanaMenu.window = new ventanaMenu();
-						ventanaMenu.window.frame.setVisible(true);		
+						ventanaMenu.window.frame.setVisible(true);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 				}
-			});	
+			});
+
+			detenElHilo();
 		}
 	}
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
-	public class hiloVideo extends Thread{
-		public void run(){
-			while(true){
+
+	public void detenElHilo() {
+
+		//frame.getContentPane().remove(jfxPanel);
+
+		Platform.runLater(() -> {
+			oracleVid.stop();
+			oracleVid.dispose();
+			oracleVid = null;
+			file = null;
+			jfxPanel.setScene(null);
+			SwingUtilities.invokeLater(() -> {
+				jfxPanel = null;
+				// force window to repaint...
+					frame.getRootPane().repaint();
+				});
+		});
+		continuar = false;
+	}
+
+	public class hiloVideo extends Thread {
+		public void run() {
+			while (continuar){
 				try {
 					Thread.sleep(100000);
 				} catch (InterruptedException e) {
@@ -173,6 +208,8 @@ public class ventanaVideoPresent implements KeyListener, ActionListener{
 						}
 					}
 				});
+				
+				detenElHilo();
 				
 			}
 		}

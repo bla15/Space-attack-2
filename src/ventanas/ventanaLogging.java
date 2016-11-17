@@ -3,12 +3,16 @@ package ventanas;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JRootPane;
 import javax.swing.border.LineBorder;
+
 import logicaVentanas.JPanelGradient;
 import logicaVentanas.logicaFondos;
+
 import javax.swing.JLabel;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,14 +21,15 @@ import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
-
 import javax.swing.JTextField;
 
+import ventanasEspeciales.videos.reproductor;
 import BD.usersDB;
 
 
@@ -43,11 +48,15 @@ public class ventanaLogging implements KeyListener, ActionListener {
     private JButton btnEntrar;
     private JButton btnRegistrarse; 
     private JButton btnSalir;
+    
+    static String[] argumentos;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		argumentos = args;
+		System.out.println(args);
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -161,16 +170,18 @@ public class ventanaLogging implements KeyListener, ActionListener {
 			String password = new String(textPass.getPassword());
 			if(conectarDBUsers.loggingBD(nick, password)){
 				window.frame.dispose();
+				String ruta = "videos\\videoPresentacion.mp4";
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							ventanaVideoPresent.window = new ventanaVideoPresent();
-							ventanaVideoPresent.window.frame.setVisible(true);		
+							reproductor.window = new reproductor(ruta, 1);
+							reproductor.window.frame.setVisible(true);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
 					}
-				});	
+				});
+				
 			}
 		}else if(e.getSource()==btnRegistrarse){
 			 try {

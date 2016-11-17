@@ -26,7 +26,7 @@ public class ventanaMenu implements KeyListener, ActionListener{
 	
 	private logicaFondos panelFondo;
 	private logicaFondos asteroide1;
-	private logicaFondos asteroide2;
+	
 	
 	private int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
     private int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
@@ -122,7 +122,21 @@ public class ventanaMenu implements KeyListener, ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getSource()==btnSalir) {
+		if(e.getSource()==btnCampaña) {
+			window.frame.dispose();
+			
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					try {
+						ventanaCampaña.window = new ventanaCampaña();
+						ventanaCampaña.window.frame.setVisible(true);		
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
+			
+		}else if(e.getSource()==btnSalir) {
 			System.exit(0);
 		}
 	}
