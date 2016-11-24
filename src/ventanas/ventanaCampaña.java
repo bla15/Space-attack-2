@@ -24,7 +24,6 @@ public class ventanaCampaña implements KeyListener, ActionListener{
 	private logicaFondos panelFondo;
 	private logicaFondos asteroide1;
 	
-	
 	private int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
     private int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
     private JButton btnNuevaCampaña;
@@ -126,12 +125,13 @@ public class ventanaCampaña implements KeyListener, ActionListener{
 		// TODO Auto-generated method stub
 		if(e.getSource()==btnNuevaCampaña) {
 			window.frame.dispose();
-			String ruta = "videos\\starCampaign.mp4";
+			ventanaLogging.musica.acabarCancion();
+			String ruta = "archivos\\videos\\starCampaign.mp4";
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
 						reproductor.window.frame.setVisible(true);
-						reproductor.window.reproductor(ruta);
+						reproductor.window.reproductor(ruta,2);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JRootPane;
 import javax.swing.border.LineBorder;
 
+import logicaNegocio.logicaMusica;
 import logicaVentanas.JPanelGradient;
 import logicaVentanas.logicaFondos;
 
@@ -19,8 +20,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -38,6 +41,7 @@ public class ventanaLogging implements KeyListener, ActionListener {
 	private usersDB conectarDBUsers = new usersDB();
 	public JFrame frame;
 	public static ventanaLogging window;
+	public static logicaMusica musica;
 	
 	private int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
     private int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
@@ -75,6 +79,8 @@ public class ventanaLogging implements KeyListener, ActionListener {
 	public ventanaLogging() {
 		conectarDBUsers.conectarBD();
 		initialize();
+		musica = new logicaMusica();
+		
 	}
 
 	/**
@@ -160,6 +166,8 @@ public class ventanaLogging implements KeyListener, ActionListener {
 		btnSalir.setBounds(10,((int)Math.floor(frame.getHeight()*0.98)-btnSalir.getHeight()), 48, 47);
 		btnSalir.addActionListener(this);
 		frame.getContentPane().add(btnSalir);
+		
+	
 	}
 
 	@Override
@@ -170,18 +178,18 @@ public class ventanaLogging implements KeyListener, ActionListener {
 			String password = new String(textPass.getPassword());
 			if(conectarDBUsers.loggingBD(nick, password)){
 				window.frame.dispose();
-				String ruta = "videos\\videoPresentacion.mp4";
+				String ruta = "archivos\\videos\\videoPresentacion.mp4";
+				musica.acabarCancion();
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							reproductor.window = new reproductor(ruta, 1);
+							reproductor.window = new reproductor(ruta);
 							reproductor.window.frame.setVisible(true);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
 					}
 				});
-				
 			}
 		}else if(e.getSource()==btnRegistrarse){
 			 try {
@@ -200,6 +208,7 @@ public class ventanaLogging implements KeyListener, ActionListener {
 		      
 			
 		}else if(e.getSource()==btnSalir){
+			musica.acabarCancion();
 			System.exit(0);
 		}
 		

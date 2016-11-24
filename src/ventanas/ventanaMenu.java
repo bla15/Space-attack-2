@@ -55,6 +55,8 @@ public class ventanaMenu implements KeyListener, ActionListener{
 	 */
 	public ventanaMenu() {
 		initialize();
+		ventanaLogging.musica.cargarCancion("archivos\\musica\\musicaMenu.wav");
+		ventanaLogging.musica.reproducirCancion();
 	}
 
 	/**

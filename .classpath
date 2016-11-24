@@ -6,5 +6,6 @@
 	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.8.0_45/jre/lib/ext/jfxrt.jar"/>
 	<classpathentry kind="lib" path="C:/Users/ALUMNO/Downloads/jna-3.5.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/ALUMNO/Downloads/vlcj-2.4.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ALUMNO/Downloads/JMF-2.1.1e/lib/jmf.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

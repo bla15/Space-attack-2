@@ -28,8 +28,10 @@ import uk.co.caprica.vlcj.player.MediaPlayerFactory;
 import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
 import uk.co.caprica.vlcj.player.embedded.videosurface.CanvasVideoSurface;
 import uk.co.caprica.vlcj.runtime.RuntimeUtil;
+import ventanas.creacionPartida;
 import ventanas.ventanaCampaña;
 import ventanas.ventanaLogging;
+import ventanas.ventanaMenu;
 
 public class reproductor implements KeyListener, ActionListener {
 
@@ -42,8 +44,12 @@ public class reproductor implements KeyListener, ActionListener {
 
 	private String ruta;
 	private File file;
+	private int tiempoTotalVideo;
 	private int camino;
 	private EmbeddedMediaPlayerComponent player;
+	
+	boolean semaforo;
+	
 	MediaPlayerFactory mediaPlayerFactory ;
 	EmbeddedMediaPlayer mediaPlayer ;
 	static {
@@ -71,13 +77,10 @@ public class reproductor implements KeyListener, ActionListener {
 	/**
 	 * Create the application.
 	 */
-	public reproductor(String ruta, int camino) {
-		this.camino=camino;
+	public reproductor(String ruta) {
 		this.ruta=ruta;
 		
-		
 		initialize();
-		reproductor(this.ruta);
 
 		// metodos para recuperar el foco y que las teclas funcionan
 		canvas.setFocusable(true);
@@ -90,14 +93,26 @@ public class reproductor implements KeyListener, ActionListener {
 			}
 		});
 	
+		reproductor(this.ruta, 1);
+		// hilos
+		hiloParaVideo  hiloParaVideo = new hiloParaVideo();
+		hiloParaVideo.start();
+		
+	
 	}
-	public void reproductor(String ruta){
+	public void reproductor(String ruta, int camino){
+		this.camino=camino;
 		file = new File(ruta);
 		player = new EmbeddedMediaPlayerComponent();
 		mediaPlayerFactory = new MediaPlayerFactory();
 		mediaPlayer= mediaPlayerFactory.newEmbeddedMediaPlayer();
         mediaPlayer.setVideoSurface(mediaPlayerFactory.newVideoSurface(canvas));
-        mediaPlayer.playMedia(file.getAbsolutePath());      
+        mediaPlayer.playMedia(file.getAbsolutePath());  
+        mediaPlayer.parseMedia();
+        tiempoTotalVideo = (int)(mediaPlayer.getLength());
+        semaforo = true;
+        System.out.println(tiempoTotalVideo);
+        
 	}
 	
 	/**
@@ -137,15 +152,27 @@ public class reproductor implements KeyListener, ActionListener {
 		// TODO Auto-generated method stub
 		if(e.getKeyCode()==KeyEvent.VK_ENTER){
 			System.out.println("El video se para");
-			mediaPlayer.stop(); 
+			mediaPlayer.stop();
+			
 			this.window.frame.dispose();
 			if (camino==1){
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							ventanaCampaña.window = new ventanaCampaña();
-							ventanaCampaña.window.frame
+							ventanaMenu.window = new ventanaMenu();
+							ventanaMenu.window.frame
 									.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}else if (camino == 2) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							creacionPartida.window = new creacionPartida();
+							creacionPartida.window.frame.setVisible(true);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -159,7 +186,57 @@ public class reproductor implements KeyListener, ActionListener {
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
+	// hilo que gestiona mi nave
+	public class hiloParaVideo extends Thread {
+		
+
+		public void run() {
+
+			/*
+			  while (semaforo) {
+			 
+				try {
+
+					Thread.sleep(tiempoTotalVideo + 500);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				semaforo = false;
+				System.out.println("El video se para");
+				mediaPlayer.stop();
+
+				reproductor.window.frame.dispose();
+				if (camino == 1) {
+					EventQueue.invokeLater(new Runnable() {
+						public void run() {
+							try {
+								ventanaMenu.window = new ventanaMenu();
+								ventanaMenu.window.frame.setVisible(true);
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						}
+					});
+				}else if (camino == 2) {
+					EventQueue.invokeLater(new Runnable() {
+						public void run() {
+							try {
+								creacionPartida.window = new creacionPartida();
+								creacionPartida.window.frame.setVisible(true);
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						}
+					});
+				}
+			}
+			*/
+
+		}
+
+	}
 }
