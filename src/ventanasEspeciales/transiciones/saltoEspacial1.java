@@ -10,6 +10,7 @@ import javax.swing.border.LineBorder;
 
 import logicaVentanas.logicaFondos;
 import ventanas.ventanaCampaña;
+import ventanas.ventanaLogging;
 import ventanas.ventanaMenu;
 import ventanas.ventanaVideoPresent.hiloVideo;
 
@@ -18,8 +19,13 @@ public class saltoEspacial1 {
 	public JFrame frame;
 	public static saltoEspacial1 window;
 	
-	private logicaFondos panelFondo;
+	private logicaFondos panelFondo1;
+	private logicaFondos panelFondo2;
+	private logicaFondos panelFondo3;
 	private JLabel lblTitulo;
+	
+	private int hilosSegundos =0;
+	private int cuentaAtras =11;
 	
 	
 	private int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
@@ -62,14 +68,11 @@ public class saltoEspacial1 {
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setUndecorated(true);
 		
-		panelFondo= new logicaFondos("/archivos/gif/saltoEspacial.gif");
-		//panelFondo.setBorder(new LineBorder(Color.BLUE));
-		//panelFondo.setSize(159,113);
-		//panelFondo.setBounds(0, 0, 434, 262);
-		frame.getContentPane().add(panelFondo);
-		panelFondo.setLayout(null);
+		panelFondo1= new logicaFondos("/archivos/imagenes/cabinaSalto.jpg");
+		panelFondo1.setLayout(null);
+		frame.getContentPane().add(panelFondo1);
 		
-		lblTitulo= new JLabel("Modo Campaña");
+		lblTitulo= new JLabel("");
 		lblTitulo.setSize(540,100);
 		lblTitulo.setBounds(ancho/2-lblTitulo.getWidth()/2, (int) Math.floor(alto*0.20), 540,100);
 		lblTitulo.setForeground(Color.blue);
@@ -78,19 +81,49 @@ public class saltoEspacial1 {
 		lblTitulo.setBorder(new LineBorder(Color.BLUE, 3));
 		
 	}
+	public void salto(){
+		
+		panelFondo2= new logicaFondos("/archivos/gif/salto1.gif");
+		panelFondo2.setLayout(null);
+		frame.getContentPane().add(panelFondo2);
+		
+		panelFondo3= new logicaFondos("/archivos/imagenes/saltoCabina.png");
+		panelFondo3.setBounds(0,0,ancho-1,alto-1);
+		panelFondo3.setLayout(null);
+		panelFondo2.add(panelFondo3);
+		
+		panelFondo1.setVisible(false);
+		
+		
+	}
 	
 	public class hiloVideo extends Thread{
 		public void run(){
-			while(true){
+			lblTitulo.setText(String.valueOf(cuentaAtras));
+			panelFondo1.add(lblTitulo);
+			while(hilosSegundos<15){
+				hilosSegundos++;
+				
+				if(cuentaAtras==11){
+					//ventanaLogging.musica.cargarCancion("archivos\\musica\\cuentaAtras.wav");
+					//ventanaLogging.musica.reproducirCancion();
+					lblTitulo.setText(String.valueOf(cuentaAtras));
+				}else if(cuentaAtras==0){
+					lblTitulo.setVisible(false);
+					salto();
+					
+				}
+				cuentaAtras--;	
 				try {
-					Thread.sleep(3000);
+					lblTitulo.setText(String.valueOf(cuentaAtras));
+					
+					Thread.sleep(1000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				//System.out.println("SUII");
 				
-				panelFondo.add(lblTitulo);
+				//panelFondo.add(lblTitulo);
 				
 			}
 		}

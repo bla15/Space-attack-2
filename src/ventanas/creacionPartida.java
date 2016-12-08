@@ -25,6 +25,8 @@ import logicaVentanas.logicaFondos;
 
 import javax.swing.BoxLayout;
 
+import ventanasEspeciales.videos.reproductor;
+
 import java.awt.FlowLayout;
 
 public class creacionPartida implements KeyListener, ActionListener{
@@ -233,7 +235,19 @@ public class creacionPartida implements KeyListener, ActionListener{
 
 		} else if( e.getSource() == btnContinuar){
 			if((textNombre.getText().length() != 0) && (miPartida.getRaza() !=  null)){
+				miPartida.setNombreComandante(textNombre.getText());
 				System.out.println("SUIIII");
+				window.frame.dispose();
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							ventanaPresentacion.window = new ventanaPresentacion();
+							ventanaPresentacion.window.frame.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
 			}else{
 				if(textNombre.getText().length() == 0){
 					JOptionPane.showMessageDialog(null, "ERROR de nombre de piloto");
@@ -242,7 +256,7 @@ public class creacionPartida implements KeyListener, ActionListener{
 				}
 			}
 		}else if( e.getSource() == btnAtras){
-window.frame.dispose();
+			window.frame.dispose();
 			
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
