@@ -126,8 +126,8 @@ public class saltoEspacial1 implements KeyListener, ActionListener{
 				hilosSegundos++;
 				
 				if(cuentaAtras==11){
-					//ventanaLogging.musica.cargarCancion("archivos\\musica\\cuentaAtras.wav");
-					//ventanaLogging.musica.reproducirCancion();
+					ventanaLogging.musica.cargarCancion("archivos\\musica\\cuentaAtras.wav");
+					ventanaLogging.musica.reproducirCancion();
 					lblTitulo.setText(String.valueOf(cuentaAtras));
 				}else if(cuentaAtras==0){
 					lblTitulo.setVisible(false);

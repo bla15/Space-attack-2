@@ -177,8 +177,8 @@ public class ventanaEmergencia implements KeyListener, ActionListener{
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
-						saltoEspacial1.window = new saltoEspacial1();
-						saltoEspacial1.window.frame.setVisible(true);		
+						ventanaPrincipal.window = new ventanaPrincipal("/archivos/imagenes/fondo1.jpg");
+						ventanaPrincipal.window.frame.setVisible(true);		
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
