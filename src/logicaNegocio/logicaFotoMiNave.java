@@ -29,7 +29,7 @@ public class logicaFotoMiNave extends JLabel {
 			BufferedImage imgagenPrimitiva = null;//CReamos una BufferedImage de nombre "img" , con la cual se lee el archivo donde esta la imagen
 			//Hacemos el try cathc por si no en cuentra el fichero
 			try {
-				imgagenPrimitiva = ImageIO.read(getClass().getResource("/archivos/imagenes/nave1.png"));
+				imgagenPrimitiva = ImageIO.read(getClass().getResource("/archivos/elementosNave/nave1.png"));
 		
 			} catch (IOException e) {
 				System.err.print("No se ha podido cargar bien la imagen");

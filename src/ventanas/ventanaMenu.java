@@ -12,6 +12,7 @@ import java.awt.event.KeyListener;
 import javax.swing.JFrame;
 import javax.swing.border.LineBorder;
 
+import logicaNegocio.logicaNivel;
 import logicaVentanas.logicaFondos;
 
 import javax.swing.JPanel;
@@ -21,6 +22,7 @@ import javax.swing.JButton;
 
 public class ventanaMenu implements KeyListener, ActionListener{
 
+	public static logicaNivel ln;
 	public JFrame frame;
 	public static ventanaMenu window;
 	

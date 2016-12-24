@@ -19,6 +19,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.border.LineBorder;
 
 import logicaNegocio.logicaMusica;
+import logicaNegocio.logicaNivel;
 import logicaVentanas.logicaFondos;
 import ventanasEspeciales.transiciones.saltoEspacial1;
 
@@ -174,16 +175,7 @@ public class ventanaEmergencia implements KeyListener, ActionListener{
 		}else if( e.getSource() == btnDefensa){
 			window.frame.dispose();
 			
-			EventQueue.invokeLater(new Runnable() {
-				public void run() {
-					try {
-						ventanaPrincipal.window = new ventanaPrincipal("/archivos/imagenes/fondo1.jpg");
-						ventanaPrincipal.window.frame.setVisible(true);		
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			});
+			ventanaMenu.ln = new logicaNivel(1);
 		}
 	}
 

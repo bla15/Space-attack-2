@@ -103,7 +103,7 @@ public class saltoEspacial1 implements KeyListener, ActionListener{
 		panelFondo1.setVisible(false);	
 	}
 	public void llegada(){
-		panelFondo2.setCambio("/archivos/imagenes/fondo1.jpg");
+		panelFondo2.setCambio("/archivos/mapas/fondo1.jpg");
 		
 		btnContinuar = new JButton("continuar");
 		btnContinuar.setSize(260,50);
