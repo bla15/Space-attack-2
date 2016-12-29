@@ -1,15 +1,32 @@
   package logicaNegocio;
 
-import java.awt.EventQueue;
 
+
+import java.awt.EventQueue;
+import java.awt.color.CMMException;
+
+import logicaNegocio.logicaEnemigos.enemigoDos;
+import logicaNegocio.logicaEnemigos.enemigoUno;
+import ventanas.ventanaEntreBatallas;
+import ventanas.ventanaMenu;
 import ventanas.ventanaPrincipal;
+import ventanasEspeciales.transiciones.saltoEspacial1;
+import ventanasEspeciales.transiciones.saltoEstandar;
 
 public class logicaNivel {
 
 	int nivel;
 	private String[] mapas = {"fondo1", "fondo2"};
 	public static String arma ="/archivos/armas/bala.png";
+	public static logicaCambio lc;
+	public static boolean cambioMapa = true;
 	String fondo;	 
+	
+	//Creamos los diferentes tipos de enmigos
+	enemigoUno enemigosFirst;
+	enemigoDos enemigoSecond;
+
+	
 	/**
 	 *Constructor de clase
 	 */
@@ -23,6 +40,7 @@ public class logicaNivel {
 	 *Metodo encargado de crear la partida
 	 */
 	public void crearPartida(){
+		
 		fondo=mapas[nivel-1];
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -34,45 +52,96 @@ public class logicaNivel {
 				}
 			}
 		});
+		
+		//creamos las ventanas intermedias
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ventanaEntreBatallas.window = new ventanaEntreBatallas();	
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		
+		//creamos las ventanas intermedias
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							saltoEstandar.window = new saltoEstandar("/archivos/mapas/fondo2.jpg");	
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+		
+		//empieza el contador para el cambio de mapa
+		lc = new logicaCambio();
 	}
-	public void verNivel(int i){
-		if(i==1){
-			nivelUno();
-		}else if(i==2){
+	/**
+	 * Metodo para identificar en que nivel se empieza
+	 */
+	public void identificarNivel(){
+		if(nivel==1){
+			//enemigosFirst = new enemigoUno();
+			enemigoSecond = new enemigoDos();
+		}else if(nivel==2){
+			enemigosFirst = new enemigoUno();
+		}else if(nivel==3){
+
+		}else if(nivel==4){
 			
-		}else if(i==3){
+		}else if(nivel==5){
 			
-		}else if(i==4){
-			
-		}else if(i==5){
-			
-		}else if(i==6){
+		}else{
 			
 		}
 	}
-	public void nivelUno(){
-		
+	/**
+	 * Metodo encaegado de realizar el cambio
+	 */
+	public void cambio(){
+		nivel++;
+		cambioMapa = false;
+		lc.setPausa2(false);
+	}
+	public void salto(){
+		if(nivel==2){
+			saltoEstandar.window.frame.setVisible(true);
+			saltoEstandar.window.comenzar();
+		}
+		if(nivel==3){
+			saltoEstandar.window.reutilizar("/archivos/mapas/salto2.jpg", "/archivos/mapas/fondo3.jpg");
+			saltoEstandar.window.frame.setVisible(true);	
+		}
+	}
+	public void mapaNuevo(){
+		System.out.println(nivel);
+		if(nivel==2){
+			cambioMapa = true;
+			lc.tiempoAlEmpezar=(int) System.currentTimeMillis();
+			ventanaPrincipal.fondoJuego.setCambio("/archivos/mapas/fondo2.jpg");
+			ventanaPrincipal.window.frame.setVisible(true);
+			lc.setPausa2(true);
+			identificarNivel();
+		}else if(nivel==3){
+			cambioMapa = true;
+			lc.tiempoAlEmpezar=(int) System.currentTimeMillis();
+			ventanaPrincipal.fondoJuego.setCambio("/archivos/mapas/fondo3.jpg");
+			ventanaPrincipal.window.frame.setVisible(true);
+			lc.setPausa2(true);
+			identificarNivel();
+		}else if(nivel==4){
+
+		}else if(nivel==5){
+			
+		}else if(nivel==6){
+			
+		}else{
+			
+		}
 	}
 
-	public void nivelDos(){
-
-	}
-
-	public void nivelTres(){
-
-	}
-
-	public void nivelCuatro(){
-
-	}
-
-	public void nivelCinco(){
-
-	}
-
-	public void nivelSeis(){
-
-	}
 	public int getNivel() {
 		return nivel;
 	}

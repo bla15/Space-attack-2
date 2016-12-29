@@ -11,8 +11,10 @@ import java.awt.event.KeyListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import logicaNegocio.logicaConjuntaMiNave;
+import logicaNegocio.logicaCorazones;
 import logicaNegocio.logicaFotoMiNave;
 import logicaNegocio.logicaArmas.armaConjunto;
 import logicaNegocio.logicaArmas.logicaMovimientoArma;
@@ -26,6 +28,8 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.awt.BorderLayout;
+import javax.swing.BoxLayout;
 
 
 public class ventanaPrincipal  implements KeyListener, ActionListener {
@@ -33,12 +37,13 @@ public class ventanaPrincipal  implements KeyListener, ActionListener {
 	public static JFrame frame;
 	public static ventanaPrincipal window;
 	
-	private int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
+	public static int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
     private int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
     
     public static logicaFondos fondoJuego;
     private String rutaFondo;
     public static logicaFondos fondoControles;
+    public static JPanel panelCorazones;
     
     private JButton bSalir;
 	private JButton bPause;
@@ -70,6 +75,9 @@ public class ventanaPrincipal  implements KeyListener, ActionListener {
 	//Boolean para el boton pausa
 	boolean contador;
 	
+	//gestion de los corazones
+	public static logicaCorazones corazon;
+	public static int vida=8;
 	/**
 	 * Launch the application.
 	 */
@@ -108,13 +116,17 @@ public class ventanaPrincipal  implements KeyListener, ActionListener {
 
 		coheteIzquierdo= new logicaCoheteIzquierdo();
 		coheteIzquierdo.setLocation((int) Math.floor(ancho * 0.5)-coheteIzquierdo.getWidth()-34, (int) Math.floor(alto * 0.755));
-
+		
 		//hilos
 		movimiento.movimientoBase();
 		movimientoArma.movimentoBaseArma();
 
 		initialize();
-		
+
+		//metemos los corazones
+		corazon= new logicaCorazones(vida);
+
+		ventanaMenu.ln.identificarNivel();
 		//metodos para recuperar el foco y que las teclas funcionan
 		fondoJuego.setFocusable(true);
 		fondoJuego.requestFocus();
@@ -160,6 +172,14 @@ public class ventanaPrincipal  implements KeyListener, ActionListener {
 		fondoJuego.add(coheteDerecho);
 		fondoJuego.add(coheteIzquierdo);
 		
+		panelCorazones = new JPanel();
+		panelCorazones.setLayout(null);
+		panelCorazones.setBorder(new LineBorder(Color.BLUE, 2));
+		panelCorazones.setSize(190,60);
+		panelCorazones.setBounds( (int) Math.floor(fondoControles.getWidth() * 0.1), (int) Math.floor(fondoControles.getHeight()* 0.55), panelCorazones.getWidth(), panelCorazones.getHeight());
+		panelCorazones.setOpaque( false );
+		fondoControles.add(panelCorazones);
+	
 		//Ponemos los botones
 		bSalir = new JButton("");
 		bSalir.setSize(62,65);
