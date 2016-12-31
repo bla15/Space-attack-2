@@ -1,17 +1,15 @@
 package logicaNegocio.logicaEnemigos;
 
-
 import java.awt.geom.Area;
 import java.util.ArrayList;
 
 import logicaNegocio.logicaFotoMiNave;
-import ventanas.creacionPartida;
-import ventanas.ventanaCampaña;
+import logicaNegocio.movimiento.logicaEsfera;
 import ventanas.ventanaEntreBatallas;
 import ventanas.ventanaMenu;
 import ventanas.ventanaPrincipal;
 
-public class enemigoUno {
+public class enemigoCinco {
 	//limites
 	int limiteDerecho=ventanaPrincipal.fondoJuego.WIDTH;
 	int limiteIzquierdo=ventanaPrincipal.ancho-50;
@@ -22,28 +20,36 @@ public class enemigoUno {
 	//los enemigos abatidos
 	public  logicaEnemigosConjunta muerte;
 	ArrayList<logicaEnemigosConjunta> misMuertes = new ArrayList<logicaEnemigosConjunta>();	
-	
+
 	//Variables de dificultad
-	String tipoEnemigo= "/archivos/enemigos/uno.png";
+	String tipoEnemigo= "/archivos/enemigos/cinco.png";
 	int velocidadEstandar=-50;
 	int tiempoCreacion=2000;
 
 	//bandera de los hilos
 	public static boolean funcionar=true;
-	
+
 	//hilos
 	hiloCreacionEnemigos creacion;
 	
+	//esfera
+	logicaEsfera esfera;
+
 	/**
 	 * Constructo de clase
 	 */
-	public enemigoUno(){
-		
+	public enemigoCinco(){
 		//lave de los hilos
 		funcionar=true;
 
 		velocidadEstandar=-50;
 		tiempoCreacion=2000;
+		
+		//esfera
+		esfera= new logicaEsfera();
+		esfera.setVisible(true);
+		esfera.setLocation(600, 480);
+		ventanaPrincipal.fondoJuego.add(esfera);
 
 		//lanzams hilo de creacion de enemigos
 		creacion = new hiloCreacionEnemigos(); 
@@ -62,6 +68,7 @@ public class enemigoUno {
 		moverMuerte.start();
 
 	}
+
 	/**
 	 * Metodo que me devuelve el tamamño del array de enemigo
 	 * @return enemigos en juego
@@ -69,30 +76,36 @@ public class enemigoUno {
 	public int getTamañoArray(){
 		return misEnemigos.size();
 	}
-	
 	public class hiloCreacionEnemigos extends Thread{
 		public void run() {
 			while(funcionar&&ventanaPrincipal.vida>0&& ventanaMenu.ln.cambioMapa){
 				//usamos el boton pausar
 				if(ventanaPrincipal.pausar==true){
-					
+
 					unEnemigo= new logicaEnemigosConjunta(tipoEnemigo);
 					//posicon aleatoria en el eje de las x (sin que toque los bordes para que se vea bien la imagen
 					unEnemigo.setPosX((int)(Math.random()*((limiteIzquierdo)-limiteDerecho+1)+limiteDerecho));
 					//la posicion de las y es el alto del panel
 					unEnemigo.setPosY(ventanaPrincipal.fondoJuego.HEIGHT);
-					
+					//le damos un giro hacia la derecha o izquierda
+					int numero = (int) (Math.random() * 2);
+					if(numero==0){
+						unEnemigo.setGiro(270);
+					}else{
+						unEnemigo.setGiro(90);
+					}
+
 					//lo metemos en el array de enmigos
 					misEnemigos.add(unEnemigo);
-					
+
 					//lo sacmos en el panel de juego
 					if(unEnemigo!=null){
-						
+
 						ventanaPrincipal.fondoJuego.add(unEnemigo.getFotoEnemigo());
 						ventanaPrincipal.fondoJuego.repaint();
 						//cada nuevo enemigo sale mas rapido
 						velocidadEstandar-=5;
-						
+
 					}else{
 						System.out.println("no hay aun enemigo");
 					}
@@ -107,7 +120,7 @@ public class enemigoUno {
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-					
+
 				}
 			}
 		}
@@ -123,10 +136,12 @@ public class enemigoUno {
 			while(ventanaPrincipal.vida>0&&(funcionar)){
 				//usamos el boton pausar
 				if(ventanaPrincipal.pausar==true && ventanaPrincipal.corazon!=null){
+					esfera.setLocation((int)ventanaPrincipal.naveConjunta.getPosX()-23,500);
 					//les damos movimiento
 					for(i=0;i<misEnemigos.size();i++){
 						//misEnemigos.get(i).gira(10);
 						misEnemigos.get(i).setSuVelocidad(velocidadEstandar);
+						//Ultimo modificado con giro = 90 como giro base (el movimiento enemigo es ya conocido)
 						misEnemigos.get(i).mueve(0.040, misEnemigos.get(i).getGiro());
 						ventanaPrincipal.fondoJuego.repaint();
 					}
@@ -145,7 +160,6 @@ public class enemigoUno {
 								
 								//LLAMAR METODO CAMBIO PANTALLA MUERTE
 								ventanaMenu.ln.muerte(ventanaMenu.ln.getNivel());
-							
 								//paramos los hilos
 								ventanaPrincipal.funcionar=false;
 							}else if((ventanaPrincipal.vida % 2) != 0) {
@@ -154,6 +168,16 @@ public class enemigoUno {
 							}else if ((ventanaPrincipal.vida % 2) == 0) {
 								ventanaPrincipal.corazon.setVidas(ventanaPrincipal.vida);
 								ventanaPrincipal.corazon.pares();
+							}
+						}
+						
+						//miramos los rebotes en los limites latetrales
+						//primero si existen elementos
+						if(misEnemigos.size()!=0){
+							if(misEnemigos.get(i).getPosX() < limiteDerecho){
+								misEnemigos.get(i).setGiro(270);
+							} else if (misEnemigos.get(i).getPosX() > limiteIzquierdo){
+								misEnemigos.get(i).setGiro(90);
 							}
 						}
 					}	
@@ -167,6 +191,7 @@ public class enemigoUno {
 			}
 		}
 	}
+	
 	/*
 	 * hilo que gestiona los choques de los enemigos
 	 */
@@ -209,6 +234,7 @@ public class enemigoUno {
 					ventanaPrincipal.naveConjunta.setPosY((int) Math.floor(ventanaPrincipal.alto * 0.80)-logicaFotoMiNave.getTAMAÑO());
 					ventanaPrincipal.naveConjunta.setMiVelocidad(0);
 					ventanaPrincipal.naveConjunta.acelera(0);
+					esfera.setVisible(false);
 					
 					ventanaPrincipal.window.frame.dispose();
 					

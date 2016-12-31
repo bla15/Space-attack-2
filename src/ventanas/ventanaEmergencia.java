@@ -77,7 +77,6 @@ public class ventanaEmergencia implements KeyListener, ActionListener{
 		    
 		panelFondo= new logicaFondos("/archivos/imagenes/puentePresentacion.png");
 		panelFondo.setBorder(new LineBorder(Color.RED, 4));
-
 		frame.getContentPane().add(panelFondo);
 		panelFondo.setLayout(null);
 

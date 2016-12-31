@@ -14,11 +14,11 @@ public class logicaEnemigos {
 	 * Constructor de la clase
 	 */
 	public logicaEnemigos(){
-		//le damos una velocidad inicial al laser
+		//le damos una velocidad inicial al enemigo
 		suVelocidad = 50;
 		suDireccionActual = 0.0;
 		posX = 500 ;
-		posY = 500;
+		posY = 10;
 	}
 	
 	public double getSuVelocidad() {

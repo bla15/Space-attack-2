@@ -38,7 +38,7 @@ public class ventanaPrincipal  implements KeyListener, ActionListener {
 	public static ventanaPrincipal window;
 	
 	public static int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
-    private int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
+    public static int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
     
     public static logicaFondos fondoJuego;
     private String rutaFondo;
@@ -78,6 +78,7 @@ public class ventanaPrincipal  implements KeyListener, ActionListener {
 	//gestion de los corazones
 	public static logicaCorazones corazon;
 	public static int vida=8;
+	public static int especialVida = 4;
 	/**
 	 * Launch the application.
 	 */

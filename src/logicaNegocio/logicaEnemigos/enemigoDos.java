@@ -3,12 +3,14 @@ package logicaNegocio.logicaEnemigos;
 import java.awt.geom.Area;
 import java.util.ArrayList;
 
+import logicaNegocio.logicaFotoMiNave;
 import logicaNegocio.logicaEnemigos.enemigoUno.hiloChoques;
 import logicaNegocio.logicaEnemigos.enemigoUno.hiloCreacionEnemigos;
 import logicaNegocio.logicaEnemigos.enemigoUno.hiloMovimiento;
 import logicaNegocio.logicaEnemigos.enemigoUno.hiloMovimientoMuertes;
 import ventanas.ventanaEntreBatallas;
 import ventanas.ventanaMenu;
+import ventanas.ventanaMuerte;
 import ventanas.ventanaPrincipal;
 
 public class enemigoDos {
@@ -151,7 +153,7 @@ public class enemigoDos {
 								ventanaPrincipal.corazon.pares();
 								
 								//LLAMAR METODO CAMBIO PANTALLA MUERTE
-							
+								ventanaMenu.ln.muerte(ventanaMenu.ln.getNivel());
 								//paramos los hilos
 								ventanaPrincipal.funcionar=false;
 							}else if((ventanaPrincipal.vida % 2) != 0) {
@@ -220,7 +222,13 @@ public class enemigoDos {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+					ventanaEntreBatallas.window.reutilizar();
 					ventanaEntreBatallas.window.frame.setVisible(true);	
+					ventanaPrincipal.naveConjunta.setPosX((int) Math.floor(ventanaPrincipal.ancho * 0.5));
+					ventanaPrincipal.naveConjunta.setPosY((int) Math.floor(ventanaPrincipal.alto * 0.80)-logicaFotoMiNave.getTAMAÑO());
+					ventanaPrincipal.naveConjunta.setMiVelocidad(0);
+					ventanaPrincipal.naveConjunta.acelera(0);
+					
 					ventanaPrincipal.window.frame.dispose();
 					
 					System.out.println("enemigo uno parado");

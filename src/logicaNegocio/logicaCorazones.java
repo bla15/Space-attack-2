@@ -115,12 +115,51 @@ public class logicaCorazones {
 			ventanaPrincipal.fondoControles.repaint();
 		}
 	}
-	
-	public int getVidas() {
-		return vidas;
-	}
+		/**
+		 * Metodo encargado de eliminar los corazones de manera especial
+		 */
+		public void eliminar(){
+			if(vidas>=4){
+				ventanaPrincipal.especialVida=4;
+				ventanaPrincipal.vida=6;
+				ventanaPrincipal.panelCorazones.remove(corazon4);
+				corazon4 = new logicaFondos("/archivos/corazones/corazonMuerto.png");
+				corazon4.setSize(39, 45);
+				corazon4.setBounds((int) Math.floor(ventanaPrincipal.panelCorazones.getWidth() * 0.74),(int) Math.floor(ventanaPrincipal.panelCorazones.getHeight() * 0.15), corazon4.getWidth(), corazon4.getHeight());
+				ventanaPrincipal.panelCorazones.add(corazon4);
+				ventanaPrincipal.fondoControles.repaint();
+			}else if(vidas==3){
+				ventanaPrincipal.vida=4;
+				ventanaPrincipal.panelCorazones.remove(corazon3);
+				corazon3 = new logicaFondos("/archivos/corazones/corazonMuerto.png");
+				corazon3.setSize(39, 45);
+				corazon3.setBounds((int) Math.floor(ventanaPrincipal.panelCorazones.getWidth() * 0.51),(int) Math.floor(ventanaPrincipal.panelCorazones.getHeight() * 0.15), corazon3.getWidth(), corazon3.getHeight());
+				ventanaPrincipal.panelCorazones.add(corazon3);
+				ventanaPrincipal.fondoControles.repaint();
+			}else if(vidas==2){
+				ventanaPrincipal.vida=2;
+				ventanaPrincipal.panelCorazones.remove(corazon2);
+				corazon2 = new logicaFondos("/archivos/corazones/corazonMuerto.png");
+				corazon2.setSize(39, 45);
+				corazon2.setBounds((int) Math.floor(ventanaPrincipal.panelCorazones.getWidth() * 0.28),(int) Math.floor(ventanaPrincipal.panelCorazones.getHeight() * 0.15), corazon2.getWidth(), corazon2.getHeight());
+				ventanaPrincipal.panelCorazones.add(corazon2);
+				ventanaPrincipal.fondoControles.repaint();
+			}else if(vidas==1){
+				ventanaPrincipal.vida=0;
+				ventanaPrincipal.panelCorazones.remove(corazon1);
+				corazon1 = new logicaFondos("/archivos/corazones/corazonMuerto.png");
+				corazon1.setSize(39, 45);
+				corazon1.setBounds((int) Math.floor(ventanaPrincipal.panelCorazones.getWidth() * 0.05),(int) Math.floor(ventanaPrincipal.panelCorazones.getHeight() * 0.15), corazon1.getWidth(), corazon1.getHeight());
+				ventanaPrincipal.panelCorazones.add(corazon1);
+				ventanaPrincipal.fondoControles.repaint();
+			}
+		}
 
-	public void setVidas(int vidas) {
-		this.vidas = vidas;
+		public int getVidas() {
+			return vidas;
+		}
+
+		public void setVidas(int vidas) {
+			this.vidas = vidas;
+		}
 	}
-}

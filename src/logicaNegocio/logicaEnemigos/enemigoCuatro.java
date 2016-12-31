@@ -1,17 +1,20 @@
 package logicaNegocio.logicaEnemigos;
 
-
 import java.awt.geom.Area;
 import java.util.ArrayList;
 
+import com.mysql.jdbc.EscapeTokenizer;
+
 import logicaNegocio.logicaFotoMiNave;
-import ventanas.creacionPartida;
-import ventanas.ventanaCampaña;
+import logicaNegocio.logicaEnemigos.enemigosTres.hiloChoques;
+import logicaNegocio.logicaEnemigos.enemigosTres.hiloCreacionEnemigos;
+import logicaNegocio.logicaEnemigos.enemigosTres.hiloMovimiento;
+import logicaNegocio.logicaEnemigos.enemigosTres.hiloMovimientoMuertes;
 import ventanas.ventanaEntreBatallas;
 import ventanas.ventanaMenu;
 import ventanas.ventanaPrincipal;
 
-public class enemigoUno {
+public class enemigoCuatro {
 	//limites
 	int limiteDerecho=ventanaPrincipal.fondoJuego.WIDTH;
 	int limiteIzquierdo=ventanaPrincipal.ancho-50;
@@ -24,9 +27,9 @@ public class enemigoUno {
 	ArrayList<logicaEnemigosConjunta> misMuertes = new ArrayList<logicaEnemigosConjunta>();	
 	
 	//Variables de dificultad
-	String tipoEnemigo= "/archivos/enemigos/uno.png";
-	int velocidadEstandar=-50;
-	int tiempoCreacion=2000;
+	String tipoEnemigo= "/archivos/enemigos/cuatro.png";
+	int velocidadEstandar=-100;
+	int tiempoCreacion=1500;
 
 	//bandera de los hilos
 	public static boolean funcionar=true;
@@ -37,7 +40,7 @@ public class enemigoUno {
 	/**
 	 * Constructo de clase
 	 */
-	public enemigoUno(){
+	public enemigoCuatro(){
 		
 		//lave de los hilos
 		funcionar=true;
@@ -121,6 +124,12 @@ public class enemigoUno {
 		int i;
 		public void run(){
 			while(ventanaPrincipal.vida>0&&(funcionar)){
+				try {
+					hiloMovimiento.sleep(30);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				//usamos el boton pausar
 				if(ventanaPrincipal.pausar==true && ventanaPrincipal.corazon!=null){
 					//les damos movimiento
@@ -136,11 +145,10 @@ public class enemigoUno {
 						if(misEnemigos.get(i).getPosY()>ventanaPrincipal.fondoJuego.getHeight()-50){
 							ventanaPrincipal.fondoJuego.remove(misEnemigos.get(i).getFotoEnemigo());
 							misEnemigos.remove(i);
-							ventanaPrincipal.vida-=1;
 							//ventanaStart.contenedor.setEnemigoPasa1(ventanaStart.contenedor.getEnemigoPasa1()+1);
 							//vemos que hacer con los corazones
-							if(ventanaPrincipal.vida<=0){
-								ventanaPrincipal.corazon.setVidas(ventanaPrincipal.vida);
+							if(ventanaPrincipal.especialVida<=0){
+								ventanaPrincipal.corazon.setVidas(ventanaPrincipal.especialVida);
 								ventanaPrincipal.corazon.pares();
 								
 								//LLAMAR METODO CAMBIO PANTALLA MUERTE
@@ -148,22 +156,17 @@ public class enemigoUno {
 							
 								//paramos los hilos
 								ventanaPrincipal.funcionar=false;
-							}else if((ventanaPrincipal.vida % 2) != 0) {
-								ventanaPrincipal.corazon.setVidas(ventanaPrincipal.vida);
-								ventanaPrincipal.corazon.impares();
-							}else if ((ventanaPrincipal.vida % 2) == 0) {
-								ventanaPrincipal.corazon.setVidas(ventanaPrincipal.vida);
-								ventanaPrincipal.corazon.pares();
+							}else if(ventanaPrincipal.especialVida>0){
+								System.out.println(ventanaPrincipal.especialVida);
+								ventanaPrincipal.corazon.setVidas(ventanaPrincipal.especialVida);
+								ventanaPrincipal.corazon.eliminar();
 							}
+							
+							ventanaPrincipal.especialVida-=1;
 						}
 					}	
 				}
-				try {
-					hiloMovimiento.sleep(30);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				
 			}
 		}
 	}
@@ -203,6 +206,7 @@ public class enemigoUno {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+					
 					ventanaEntreBatallas.window.reutilizar();
 					ventanaEntreBatallas.window.frame.setVisible(true);	
 					ventanaPrincipal.naveConjunta.setPosX((int) Math.floor(ventanaPrincipal.ancho * 0.5));
@@ -260,3 +264,4 @@ public class enemigoUno {
 		}
 	}
 }
+

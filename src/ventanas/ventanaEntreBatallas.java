@@ -57,6 +57,15 @@ public class ventanaEntreBatallas implements KeyListener, ActionListener {
 	public ventanaEntreBatallas() {
 		initialize();
 	}
+	
+	public void reutilizar (){
+		texto.setText("ATENCION, ATENCION............ (se enciende la megafonia)   ");
+		btnContinuar.setVisible(true);
+		btnDefensa.setVisible(false);
+		frame.invalidate();
+		frame.validate();
+		frame.repaint();
+	}
 
 	/**
 	 * Initialize the contents of the frame.
@@ -97,6 +106,8 @@ public class ventanaEntreBatallas implements KeyListener, ActionListener {
 		btnDefensa.setBorder(new LineBorder(Color.GREEN, 3));
 		btnDefensa.setBounds((int) Math.floor(ancho*0.05), (int) Math.floor(alto*0.90), btnDefensa.getWidth(), btnDefensa.getHeight());
 		btnDefensa.addActionListener(this);
+		btnDefensa.setVisible(false);
+		panelFondo.add(btnDefensa);
 			
 			
 		btnContinuar = new JButton("continuar");
@@ -113,7 +124,7 @@ public class ventanaEntreBatallas implements KeyListener, ActionListener {
 		// TODO Auto-generated method stub
 		if( e.getSource() == btnContinuar){
 			texto.setText("Que la tripulacion se prepare para realizar el siguiente hiper salto");
-			panelFondo.add(btnDefensa);
+			btnDefensa.setVisible(true);
 			btnContinuar.setVisible(false);
 			frame.invalidate();
 			frame.validate();
