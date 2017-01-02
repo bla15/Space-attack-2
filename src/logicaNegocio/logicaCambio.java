@@ -44,7 +44,7 @@ public class logicaCambio {
 			    }
 				while(pausar && pausa2 ){
 					//si pasa 30 segundos hace el primer cambio de mapa
-					if(((int)System.currentTimeMillis()-tiempoAlEmpezar>4000)){
+					if(((int)System.currentTimeMillis()-tiempoAlEmpezar>8000)){
 						tiempoAlEmpezar=(int) System.currentTimeMillis();
 						System.out.println("CAMBIO");
 						//ventanaPrincipal.window.frame.dispose();

@@ -125,6 +125,7 @@ public class ventanaPrincipal  implements KeyListener, ActionListener {
 		initialize();
 
 		//metemos los corazones
+		//logicaFondos corazon1 = new logicaFondos("/archivos/escudos/completo.png");
 		corazon= new logicaCorazones(vida);
 
 		ventanaMenu.ln.identificarNivel();

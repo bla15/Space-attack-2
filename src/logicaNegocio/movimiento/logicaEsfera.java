@@ -3,6 +3,8 @@ package logicaNegocio.movimiento;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -15,7 +17,8 @@ public class logicaEsfera extends JLabel{
 	//tamaño del cohete
 	public static int tamañoX = 120;
 	public static int tamañoY = 120;
-
+	
+	public Area miArea = new Area();
 	//constructor
 	public logicaEsfera(){
 		//le damos el tamaño antes definido
@@ -34,7 +37,16 @@ public class logicaEsfera extends JLabel{
 		 *redimensionada 
 		 */
 		setIcon(new ImageIcon(imgagenPrimitiva.getScaledInstance(tamañoX, tamañoY, Image.SCALE_SMOOTH)));
-
+	}
+	
+	/**
+	 * Metodo encargado de acceder a las posiciones X e Y del proyectil
+	 */
+	public void setLocation(int x, int y) {
+		// TODO Auto-generated method stub
+		super.setLocation(x, y);
+		Rectangle r = new Rectangle(x,y,25,tamañoY);
+		miArea = new Area(r);
 	}
 	protected void paintComponent(Graphics g) {
 		Image imagenRedimensionada= ((ImageIcon)getIcon()).getImage();

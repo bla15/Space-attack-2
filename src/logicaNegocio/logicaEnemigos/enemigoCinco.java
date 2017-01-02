@@ -202,25 +202,24 @@ public class enemigoCinco {
 			while(ventanaPrincipal.vida>0&&(funcionar)){
 				//usamos el boton pausar
 				if(ventanaPrincipal.pausar==true){
-					for(z=0;z<ventanaPrincipal.misProyectiles.size();z++){
-						for(i=0;i<misEnemigos.size();i++){
-							Area areaEnemigo = new Area(misEnemigos.get(i).getFoto().miArea);
-							Area areaArma = new Area(ventanaPrincipal.misProyectiles.get(z).getFotoArma().miArea );
-							if(areaEnemigo.intersects(areaArma.getBounds2D())){
-								ventanaPrincipal.fondoJuego.remove(misEnemigos.get(i).getFotoEnemigo());
-								
-								muerte= new logicaEnemigosConjunta("/archivos/enemigos/muerte.png");
-								muerte.setPosX(misEnemigos.get(i).getPosX());
-								muerte.setPosY(misEnemigos.get(i).getPosY());
-								misMuertes.add(muerte);
-								ventanaPrincipal.fondoJuego.add(muerte.getFotoEnemigo());
-								
-								misEnemigos.remove(i);
-							}
+					for(i=0;i<misEnemigos.size();i++){
+						Area areaEnemigo = new Area(misEnemigos.get(i).getFoto().miArea);
+						Area areaEsfera = new Area(esfera.miArea);
+						if(areaEnemigo.intersects(areaEsfera.getBounds2D())){
+							System.out.println("SUIIIIIIIIIIII");
+							ventanaPrincipal.fondoJuego.remove(misEnemigos.get(i).getFotoEnemigo());
+
+							muerte= new logicaEnemigosConjunta("/archivos/enemigos/muerte.png");
+							muerte.setPosX(misEnemigos.get(i).getPosX());
+							muerte.setPosY(misEnemigos.get(i).getPosY());
+							misMuertes.add(muerte);
+							ventanaPrincipal.fondoJuego.add(muerte.getFotoEnemigo());
+
+							misEnemigos.remove(i);
 						}
+					}
 						
 					}
-				}
 				if((ventanaMenu.ln.cambioMapa==false)&& misEnemigos.size()==0 && misMuertes.size()==0){
 					try {
 						hiloChoques.sleep(2000);
