@@ -27,8 +27,8 @@ public class enemigoDos {
 
 	//Variables de dificultad
 	String tipoEnemigo= "/archivos/enemigos/dos.png";
-	int velocidadEstandar=-50;
-	int tiempoCreacion=2000;
+	int velocidadEstandar=-80;
+	int tiempoCreacion=1600;
 
 	//bandera de los hilos
 	public static boolean funcionar=true;
@@ -43,8 +43,8 @@ public class enemigoDos {
 		//lave de los hilos
 		funcionar=true;
 
-		velocidadEstandar=-50;
-		tiempoCreacion=2000;
+		velocidadEstandar=-80;
+		tiempoCreacion=1600;
 
 		//lanzams hilo de creacion de enemigos
 		creacion = new hiloCreacionEnemigos(); 

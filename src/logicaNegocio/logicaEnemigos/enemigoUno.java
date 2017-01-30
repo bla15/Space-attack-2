@@ -42,8 +42,8 @@ public class enemigoUno {
 		//lave de los hilos
 		funcionar=true;
 
-		velocidadEstandar=-50;
-		tiempoCreacion=2000;
+		velocidadEstandar=-60;
+		tiempoCreacion=1500;
 
 		//lanzams hilo de creacion de enemigos
 		creacion = new hiloCreacionEnemigos(); 

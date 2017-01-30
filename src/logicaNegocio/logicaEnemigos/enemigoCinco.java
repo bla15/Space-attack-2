@@ -17,14 +17,16 @@ public class enemigoCinco {
 	//logicas
 	public  logicaEnemigosConjunta unEnemigo;
 	ArrayList<logicaEnemigosConjunta> misEnemigos = new ArrayList<logicaEnemigosConjunta>();
+	ArrayList<Long> tiempo = new ArrayList<Long>();
 	//los enemigos abatidos
 	public  logicaEnemigosConjunta muerte;
 	ArrayList<logicaEnemigosConjunta> misMuertes = new ArrayList<logicaEnemigosConjunta>();	
 
 	//Variables de dificultad
 	String tipoEnemigo= "/archivos/enemigos/cinco.png";
-	int velocidadEstandar=-50;
+	int velocidadEstandar=-80;
 	int tiempoCreacion=2000;
+	long tiempoInicio;
 
 	//bandera de los hilos
 	public static boolean funcionar=true;
@@ -42,8 +44,9 @@ public class enemigoCinco {
 		//lave de los hilos
 		funcionar=true;
 
-		velocidadEstandar=-50;
+		velocidadEstandar=-80;
 		tiempoCreacion=2000;
+		tiempoInicio=System.currentTimeMillis();
 		
 		//esfera
 		esfera= new logicaEsfera();
@@ -97,7 +100,7 @@ public class enemigoCinco {
 
 					//lo metemos en el array de enmigos
 					misEnemigos.add(unEnemigo);
-
+					tiempo.add(System.currentTimeMillis());
 					//lo sacmos en el panel de juego
 					if(unEnemigo!=null){
 
@@ -137,6 +140,13 @@ public class enemigoCinco {
 				//usamos el boton pausar
 				if(ventanaPrincipal.pausar==true && ventanaPrincipal.corazon!=null){
 					esfera.setLocation((int)ventanaPrincipal.naveConjunta.getPosX()-23,500);
+					for(i=0;i<tiempo.size();i++){
+						if ((System.currentTimeMillis()-tiempo.get(i) >=250) && (System.currentTimeMillis()-tiempo.get(i) <=300)){
+							
+							misEnemigos.get(i).randomDestino();
+							tiempo.set(i, System.currentTimeMillis());
+						}
+					}
 					//les damos movimiento
 					for(i=0;i<misEnemigos.size();i++){
 						//misEnemigos.get(i).gira(10);
@@ -148,9 +158,18 @@ public class enemigoCinco {
 					
 					//miramos si sobrepasan las frontera
 					for(i=0;i<misEnemigos.size();i++){
+						if(misEnemigos.get(i).getPosX() < limiteDerecho){
+							misEnemigos.get(i).setGiro(270);
+							
+						} else if (misEnemigos.get(i).getPosX() > limiteIzquierdo){
+							misEnemigos.get(i).setGiro(90);
+							
+						}
+						
 						if(misEnemigos.get(i).getPosY()>ventanaPrincipal.fondoJuego.getHeight()-50){
 							ventanaPrincipal.fondoJuego.remove(misEnemigos.get(i).getFotoEnemigo());
 							misEnemigos.remove(i);
+							tiempo.remove(i);
 							ventanaPrincipal.vida-=1;
 							//ventanaStart.contenedor.setEnemigoPasa1(ventanaStart.contenedor.getEnemigoPasa1()+1);
 							//vemos que hacer con los corazones
@@ -180,7 +199,12 @@ public class enemigoCinco {
 								misEnemigos.get(i).setGiro(90);
 							}
 						}
-					}	
+					}
+					
+					if(System.currentTimeMillis()-tiempoInicio>5000){
+						tiempoInicio=System.currentTimeMillis();
+						velocidadEstandar-=5;
+					}
 				}
 				try {
 					hiloMovimiento.sleep(30);
@@ -214,7 +238,8 @@ public class enemigoCinco {
 							muerte.setPosY(misEnemigos.get(i).getPosY());
 							misMuertes.add(muerte);
 							ventanaPrincipal.fondoJuego.add(muerte.getFotoEnemigo());
-
+							
+							tiempo.remove(i);
 							misEnemigos.remove(i);
 						}
 					}

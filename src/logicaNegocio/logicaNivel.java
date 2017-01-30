@@ -8,14 +8,18 @@ import java.awt.color.CMMException;
 import logicaNegocio.logicaEnemigos.enemigoCinco;
 import logicaNegocio.logicaEnemigos.enemigoCuatro;
 import logicaNegocio.logicaEnemigos.enemigoDos;
+import logicaNegocio.logicaEnemigos.enemigoSeis;
 import logicaNegocio.logicaEnemigos.enemigoUno;
 import logicaNegocio.logicaEnemigos.enemigosTres;
 import ventanas.ventanaEntreBatallas;
+import ventanas.ventanaFinal;
 import ventanas.ventanaMenu;
 import ventanas.ventanaMuerte;
 import ventanas.ventanaPrincipal;
+import ventanas.ventanaPuntuacion;
 import ventanasEspeciales.transiciones.saltoEspacial1;
 import ventanasEspeciales.transiciones.saltoEstandar;
+import ventanasEspeciales.transiciones.ventanaGuardado;
 
 public class logicaNivel {
 
@@ -32,6 +36,7 @@ public class logicaNivel {
 	enemigosTres enemigoThird;
 	enemigoCuatro enemigoFourd;
 	enemigoCinco enemigoFive;
+	enemigoSeis enemigoSix;
 	
 	/**
 	 *Constructor de clase
@@ -69,28 +74,58 @@ public class logicaNivel {
 				}
 			}
 		});
-
 		//creamos las ventanas intermedias
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					saltoEstandar.window = new saltoEstandar("/archivos/mapas/fondo2.jpg");	
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-		//creamos las ventanas de muerte
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ventanaMuerte.window = new ventanaMuerte();	
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							ventanaFinal.window = new ventanaFinal();	
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
 				});
-		//empieza el contador para el cambio de mapa
+
+				//creamos las ventanas intermedias
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							saltoEstandar.window = new saltoEstandar("/archivos/mapas/fondo2.jpg");	
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+				//creamos las ventanas de muerte
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							ventanaMuerte.window = new ventanaMuerte();	
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+				//creamos las ventanas intermedias
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							ventanaPuntuacion.window = new ventanaPuntuacion();	
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+				//creamos las ventanas intermedias
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							ventanaGuardado.window = new ventanaGuardado();	
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+				//empieza el contador para el cambio de mapa
 		lc = new logicaCambio();
 	}
 	
@@ -99,17 +134,17 @@ public class logicaNivel {
 	 */
 	public void identificarNivel(){
 		if(nivel==1){
-			enemigoFive = new enemigoCinco();
-		}else if(nivel==2){
 			enemigosFirst = new enemigoUno();
+		}else if(nivel==2){
+			enemigoFourd = new enemigoCuatro();
 		}else if(nivel==3){
-			enemigoSecond = new enemigoDos();
+			enemigoFive = new enemigoCinco();
 		}else if(nivel==4){
 			enemigoThird = new enemigosTres();
 		}else if(nivel==5){
-			enemigoFourd = new enemigoCuatro();
+			enemigoSecond = new enemigoDos();
 		}else{
-			
+			enemigoSix = new enemigoSeis();
 		}
 	}
 	/**
@@ -138,10 +173,17 @@ public class logicaNivel {
 		}else if(nivel==5){
 			saltoEstandar.window.reutilizar("/archivos/mapas/salto4.jpg", "/archivos/mapas/fondo5.jpg");
 			saltoEstandar.window.frame.setVisible(true);	
+		}else if(nivel==6){
+			saltoEstandar.window.reutilizar("/archivos/mapas/salto5.jpg", "/archivos/mapas/fondo6.jpg");
+			saltoEstandar.window.frame.setVisible(true);	
+		} else{
+			saltoEstandar.window.reutilizar("/archivos/mapas/salto6.jpg", "/archivos/mapas/lunaEspacio.jpg");
+			saltoEstandar.window.frame.setVisible(true);
 		}
 	
 	}
 	
+
 	/**
 	 * Metodo encargado de cargar el nuevo mapa y poner la locic+a de cambio de mapa a cero
 	 */
@@ -149,9 +191,13 @@ public class logicaNivel {
 		System.out.println(nivel);
 		if(nivel==2){
 			cambioMapa = true;
+			ventanaPuntuacion.window.frame.setVisible(true);
+			identificarNivel();
+			
+			cambioMapa = true;
 			lc.tiempoAlEmpezar=(int) System.currentTimeMillis();
 			ventanaPrincipal.fondoJuego.setCambio("/archivos/mapas/fondo2.jpg");
-			ventanaPrincipal.window.frame.setVisible(true);
+			ventanaPrincipal.window.frame.setVisible(false);
 			lc.setPausa2(true);
 			identificarNivel();
 		}else if(nivel==3){
@@ -176,7 +222,12 @@ public class logicaNivel {
 			lc.setPausa2(true);
 			identificarNivel();
 		}else if(nivel==6){
-			
+			cambioMapa = true;
+			lc.tiempoAlEmpezar=(int) System.currentTimeMillis();
+			ventanaPrincipal.fondoJuego.setCambio("/archivos/mapas/fondo6.jpg");
+			ventanaPrincipal.window.frame.setVisible(true);
+			lc.setPausa2(true);
+			identificarNivel();
 		}else{
 			
 		}

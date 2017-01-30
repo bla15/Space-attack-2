@@ -147,7 +147,7 @@ public class enemigoCuatro {
 							misEnemigos.remove(i);
 							//ventanaStart.contenedor.setEnemigoPasa1(ventanaStart.contenedor.getEnemigoPasa1()+1);
 							//vemos que hacer con los corazones
-							if(ventanaPrincipal.especialVida<=0){
+							if(ventanaPrincipal.especialVida<=1){
 								ventanaPrincipal.corazon.setVidas(ventanaPrincipal.especialVida);
 								ventanaPrincipal.corazon.pares();
 								
