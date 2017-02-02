@@ -6,11 +6,13 @@ import javax.swing.JOptionPane;
 
 public class usersDB {
 	// TODO Auto-generated method stub
+	//ponemos los valores de la BD
 			String url ="jdbc:mysql://localhost:3306/";
 			String user = "root";
 			String password = "root";
 			public Connection con;
-			
+	
+			//conectamos con la BD pasando el usuario y la contraseña
 	public void conectarBD(){
 		try {
 			
@@ -41,7 +43,7 @@ public class usersDB {
 			while(res.next()){
 				cap = res.getString("role");
 			}
-			if(!cap.equals("usuario")&&(!cap.equals("administrador"))){
+			if(!cap.equals("ROLE_USER")&&(!cap.equals("ROLE_ADMIN"))){
 				JOptionPane.showMessageDialog(null, "ERROR");
 				return false;
 			}

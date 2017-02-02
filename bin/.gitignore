@@ -1,4 +1,10 @@
-/ventanas/
-/logicaNegocio/
+/BD/
 /archivos/
+/logicaNegocio/
+/logicaVentanas/
+/ventanas/
 /ventanasEspeciales/
+/gestorDeDatos/
+/gestorDeNegocio/
+/conversorContraseñas.class
+/contraseñas/

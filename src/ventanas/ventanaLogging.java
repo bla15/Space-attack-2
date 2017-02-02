@@ -177,6 +177,7 @@ public class ventanaLogging implements KeyListener, ActionListener {
 			String nick = textNick.getText();
 			String password = new String(textPass.getPassword());
 			if(conectarDBUsers.loggingBD(nick, password)){
+				
 				window.frame.dispose();
 				String ruta = "archivos\\videos\\videoPresentacion.mp4";
 				musica.acabarCancion();

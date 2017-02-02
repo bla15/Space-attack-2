@@ -7,5 +7,6 @@
 	<classpathentry kind="lib" path="C:/Users/ALUMNO/Downloads/jna-3.5.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/ALUMNO/Downloads/vlcj-2.4.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/ALUMNO/Downloads/JMF-2.1.1e/lib/jmf.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ALUMNO/Downloads/jbcrypt-0.3m.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
