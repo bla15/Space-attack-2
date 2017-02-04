@@ -1,5 +1,7 @@
 package ventanas;
 
+import gestorDeNegocio.gestorUsuario;
+
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.EventQueue;
@@ -28,6 +30,7 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
@@ -38,7 +41,7 @@ import BD.usersDB;
 
 public class ventanaLogging implements KeyListener, ActionListener {
 	
-	private usersDB conectarDBUsers = new usersDB();
+	private gestorUsuario GU = new gestorUsuario();
 	public JFrame frame;
 	public static ventanaLogging window;
 	public static logicaMusica musica;
@@ -77,7 +80,6 @@ public class ventanaLogging implements KeyListener, ActionListener {
 	 * Create the application.
 	 */
 	public ventanaLogging() {
-		conectarDBUsers.conectarBD();
 		initialize();
 		musica = new logicaMusica();
 		
@@ -176,21 +178,30 @@ public class ventanaLogging implements KeyListener, ActionListener {
 		if (e.getSource()==btnEntrar) {
 			String nick = textNick.getText();
 			String password = new String(textPass.getPassword());
-			if(conectarDBUsers.loggingBD(nick, password)){
-				
-				window.frame.dispose();
-				String ruta = "archivos\\videos\\videoPresentacion.mp4";
-				musica.acabarCancion();
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							reproductor.window = new reproductor(ruta);
-							reproductor.window.frame.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
+			try {
+				if(GU.comprobar(nick, password)){
+					
+					window.frame.dispose();
+					String ruta = "archivos\\videos\\videoPresentacion.mp4";
+					musica.acabarCancion();
+					EventQueue.invokeLater(new Runnable() {
+						public void run() {
+							try {
+								reproductor.window = new reproductor(ruta);
+								reproductor.window.frame.setVisible(true);
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
 						}
-					}
-				});
+					});
+				}else{
+					JOptionPane.showMessageDialog(frame, 
+						    "Usuario o contraseña incorrectos",
+							"Problema de acceso", JOptionPane.WARNING_MESSAGE);
+				}
+			} catch (ClassNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 		}else if(e.getSource()==btnRegistrarse){
 			 try {
