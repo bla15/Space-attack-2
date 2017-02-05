@@ -252,7 +252,8 @@ public class hiloChoques extends Thread{
 					e.printStackTrace();
 				}
 				//ventanaEntreBatallas.window.reutilizar();
-				//ventanaEntreBatallas.window.frame.setVisible(true);	
+				//ventanaEntreBatallas.window.frame.setVisible(true);
+				ventanaPrincipal.window.frame.dispose();
 				ventanaFinal.window.frame.setVisible(true);
 				ventanaPrincipal.naveConjunta.setPosX((int) Math.floor(ventanaPrincipal.ancho * 0.5));
 				ventanaPrincipal.naveConjunta.setPosY((int) Math.floor(ventanaPrincipal.alto * 0.80)-logicaFotoMiNave.getTAMAÑO());
@@ -260,9 +261,9 @@ public class hiloChoques extends Thread{
 				ventanaPrincipal.naveConjunta.acelera(0);
 				esfera.setVisible(false);
 
-				ventanaPrincipal.window.frame.dispose();
+				
 
-				System.out.println("enemigo uno parado");
+				System.out.println("enemigo seis parado");
 				funcionar=false;
 
 			}

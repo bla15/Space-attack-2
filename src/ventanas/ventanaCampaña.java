@@ -13,6 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
+
+import pruebas.pruebasCargarPartida;
 import ventanasEspeciales.videos.reproductor;
 import logicaVentanas.logicaFondos;
 
@@ -137,6 +139,11 @@ public class ventanaCampaña implements KeyListener, ActionListener{
 					}
 				}
 			});;
+			
+		}else if(e.getSource()==btnCargarCampaña) {
+			window.frame.dispose();
+			//ventanaLogging.musica.acabarCancion();
+			pruebasCargarPartida mp = new pruebasCargarPartida();
 			
 		}else if(e.getSource()==btnAtras) {
 			window.frame.dispose();

@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import pruebas.pruebasCargarPartida;
 import ventanas.ventanaLogging;
 import ventanas.ventanaMenu;
 import ventanasEspeciales.transiciones.saltoEspacial1.hiloVideo;
@@ -46,6 +47,12 @@ public class saltoEstandar implements KeyListener, ActionListener{
     
     //Ruta llegada
     String ruta2;
+    
+    //booleano que controla si se trata de una partida cargada
+    boolean carga;
+    
+    // hilos
+ 		hiloVideo miVideo = new hiloVideo();
 
 	/**
 	 * Launch the application.
@@ -54,7 +61,7 @@ public class saltoEstandar implements KeyListener, ActionListener{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					window = new saltoEstandar("/archivos/mapas/fondo2.jpg");
+					window = new saltoEstandar("/archivos/mapas/fondo2.jpg", false);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -66,8 +73,9 @@ public class saltoEstandar implements KeyListener, ActionListener{
 	/**
 	 * Create the application.
 	 */
-	public saltoEstandar( String ruta2) {
+	public saltoEstandar( String ruta2, boolean carga) {
 		this.ruta2=ruta2;
+		this.carga=carga;
 		initialize();
 
 	}
@@ -125,24 +133,35 @@ public class saltoEstandar implements KeyListener, ActionListener{
 		funcionar=true;
 		hilosSegundos =0;
 		cuentaAtras =11;
-		// hilos
-		hiloVideo miVideo = new hiloVideo();
 		miVideo.start();
 	}
 	
 	public void reutilizar(String ruta1, String ruta2){
-		panelFondo1.setCambio(ruta1);
-		panelFondo1.setVisible(true);
-		panelFondo2.setCambio("/archivos/gif/salto1.gif");
-		panelFondo2.setVisible(false);
-		panelFondo3.setVisible(false);
-		btnContinuar.setVisible(false);
-		funcionar=true;
-		hilosSegundos =0;
-		cuentaAtras =11;
-		this.ruta2=ruta2;
-		lblTitulo.setVisible(true);
-		
+		if(carga==true){
+			System.out.println("partida cargada");
+			panelFondo1.setCambio(ruta1);
+			this.ruta2=ruta2;
+			funcionar=true;
+			
+			hilosSegundos =0;
+			cuentaAtras =11;
+			miVideo.start();
+			carga=false;
+		}else{
+			hilosSegundos =0;
+			cuentaAtras =11;
+			panelFondo1.setCambio(ruta1);
+			panelFondo1.setVisible(true);
+			panelFondo2.setCambio("/archivos/gif/salto1.gif");
+			panelFondo2.setVisible(false);
+			panelFondo3.setVisible(false);
+			btnContinuar.setVisible(false);
+			funcionar=true;
+			hilosSegundos =0;
+			cuentaAtras =11;
+			this.ruta2=ruta2;
+			lblTitulo.setVisible(true);
+		}
 	}
 	
 	public void salto(){
@@ -208,7 +227,15 @@ public class saltoEstandar implements KeyListener, ActionListener{
 					e.printStackTrace();
 				}
 				while(funcionar==true){
+					try {
+						lblTitulo.setText(String.valueOf(cuentaAtras));
+						Thread.sleep(10);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					while(hilosSegundos<19){
+						System.out.println(hilosSegundos);
 						hilosSegundos++;
 						if(cuentaAtras==11){
 							//ventanaLogging.musica.cargarCancion("archivos\\musica\\cuentaAtras.wav");

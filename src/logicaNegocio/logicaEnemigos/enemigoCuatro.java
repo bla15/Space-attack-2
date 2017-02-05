@@ -141,10 +141,20 @@ public class enemigoCuatro {
 					}
 					
 					//miramos si sobrepasan las frontera
+					//miramos si sobrepasan las frontera
 					for(i=0;i<misEnemigos.size();i++){
+						if(misEnemigos.get(i).getPosX() < limiteDerecho){
+							misEnemigos.get(i).setGiro(270);
+
+						} else if (misEnemigos.get(i).getPosX() > limiteIzquierdo){
+							misEnemigos.get(i).setGiro(90);
+
+						}
+
 						if(misEnemigos.get(i).getPosY()>ventanaPrincipal.fondoJuego.getHeight()-50){
 							ventanaPrincipal.fondoJuego.remove(misEnemigos.get(i).getFotoEnemigo());
 							misEnemigos.remove(i);
+
 							//ventanaStart.contenedor.setEnemigoPasa1(ventanaStart.contenedor.getEnemigoPasa1()+1);
 							//vemos que hacer con los corazones
 							if(ventanaPrincipal.especialVida<=1){
@@ -153,18 +163,17 @@ public class enemigoCuatro {
 								
 								//LLAMAR METODO CAMBIO PANTALLA MUERTE
 								ventanaMenu.ln.muerte(ventanaMenu.ln.getNivel());
-							
+								
 								//paramos los hilos
 								ventanaPrincipal.funcionar=false;
 							}else if(ventanaPrincipal.especialVida>0){
-								System.out.println(ventanaPrincipal.especialVida);
 								ventanaPrincipal.corazon.setVidas(ventanaPrincipal.especialVida);
 								ventanaPrincipal.corazon.eliminar();
 							}
-							
 							ventanaPrincipal.especialVida-=1;
 						}
-					}	
+
+					}
 				}
 				
 			}

@@ -133,6 +133,7 @@ public class enemigosTres {
 							if(misEnemigos.get(i).getPosY()>ventanaPrincipal.fondoJuego.getHeight()-50){
 								ventanaPrincipal.fondoJuego.remove(misEnemigos.get(i).getFotoEnemigo());
 								misEnemigos.remove(i);
+								
 								ventanaPrincipal.vida-=1;
 								//ventanaStart.contenedor.setEnemigoPasa1(ventanaStart.contenedor.getEnemigoPasa1()+1);
 								//vemos que hacer con los corazones
@@ -200,15 +201,14 @@ public class enemigosTres {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						
-						ventanaEntreBatallas.window.reutilizar();
+						ventanaPrincipal.window.frame.dispose();
 						ventanaEntreBatallas.window.frame.setVisible(true);
 						ventanaPrincipal.naveConjunta.setPosX((int) Math.floor(ventanaPrincipal.ancho * 0.5));
 						ventanaPrincipal.naveConjunta.setPosY((int) Math.floor(ventanaPrincipal.alto * 0.80)-logicaFotoMiNave.getTAMAÑO());
 						ventanaPrincipal.naveConjunta.setMiVelocidad(0);
 						ventanaPrincipal.naveConjunta.acelera(0);
+						ventanaEntreBatallas.window.reutilizar();
 						
-						ventanaPrincipal.window.frame.dispose();
 						
 						System.out.println("enemigo uno parado");
 						funcionar=false;

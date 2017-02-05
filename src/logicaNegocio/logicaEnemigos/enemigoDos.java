@@ -39,7 +39,7 @@ public class enemigoDos {
 	/**
 	 * Constructo de clase
 	 */
-	public enemigoDos(){
+	public enemigoDos(){		
 		//lave de los hilos
 		funcionar=true;
 
@@ -145,13 +145,14 @@ public class enemigoDos {
 						if(misEnemigos.get(i).getPosY()>ventanaPrincipal.fondoJuego.getHeight()-50){
 							ventanaPrincipal.fondoJuego.remove(misEnemigos.get(i).getFotoEnemigo());
 							misEnemigos.remove(i);
+							
 							ventanaPrincipal.vida-=1;
 							//ventanaStart.contenedor.setEnemigoPasa1(ventanaStart.contenedor.getEnemigoPasa1()+1);
 							//vemos que hacer con los corazones
 							if(ventanaPrincipal.vida<=0){
 								ventanaPrincipal.corazon.setVidas(ventanaPrincipal.vida);
 								ventanaPrincipal.corazon.pares();
-								
+								System.out.println("ALTOOOOO");
 								//LLAMAR METODO CAMBIO PANTALLA MUERTE
 								ventanaMenu.ln.muerte(ventanaMenu.ln.getNivel());
 								//paramos los hilos
@@ -222,16 +223,17 @@ public class enemigoDos {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					ventanaEntreBatallas.window.reutilizar();
+					
+					ventanaPrincipal.window.frame.dispose();
 					ventanaEntreBatallas.window.frame.setVisible(true);	
 					ventanaPrincipal.naveConjunta.setPosX((int) Math.floor(ventanaPrincipal.ancho * 0.5));
 					ventanaPrincipal.naveConjunta.setPosY((int) Math.floor(ventanaPrincipal.alto * 0.80)-logicaFotoMiNave.getTAMAÑO());
 					ventanaPrincipal.naveConjunta.setMiVelocidad(0);
 					ventanaPrincipal.naveConjunta.acelera(0);
+					ventanaEntreBatallas.window.reutilizar();
 					
-					ventanaPrincipal.window.frame.dispose();
 					
-					System.out.println("enemigo uno parado");
+					System.out.println("enemigo dos parado");
 					funcionar=false;
 				
 				}

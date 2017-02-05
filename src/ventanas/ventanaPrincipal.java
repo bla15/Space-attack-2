@@ -29,12 +29,16 @@ import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.BorderLayout;
+
 import javax.swing.BoxLayout;
+
+import pruebas.ventanaPruebas;
+import ventanasEspeciales.transiciones.ventanaGuardado;
 
 
 public class ventanaPrincipal  implements KeyListener, ActionListener {
 
-	public static JFrame frame;
+	public JFrame frame;
 	public static ventanaPrincipal window;
 	
 	public static int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
@@ -77,30 +81,25 @@ public class ventanaPrincipal  implements KeyListener, ActionListener {
 	
 	//gestion de los corazones
 	public static logicaCorazones corazon;
-	public static int vida=8;
-	public static int especialVida = 4;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ventanaPrincipal window = new ventanaPrincipal("/archivos/mapas/fondo1.jpg");
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	public static int vida;
+	public static int especialVida ;
 
 	/**
 	 * Create the application.
 	 */
-	public ventanaPrincipal(String rutaFondo) {
-		this.rutaFondo=rutaFondo;
+	public ventanaPrincipal(String rutaFondo, int vidas) {
 		
+		this.rutaFondo=rutaFondo;
+		if(vidas>=7){
+			especialVida=4;
+		}else if((vidas<7)&&(vidas>4)){
+			especialVida=3;
+		}else if((vidas<5)&&(vidas>2)){
+			especialVida=2;
+		}else{
+			especialVida=1;
+		}
+		this.vida=vidas;
 		//instanciamos mi nave y la colocamos en la posicion inicial
 		naveConjunta = new logicaConjuntaMiNave();
 		naveConjunta.setPosX((int) Math.floor(ancho * 0.5));
@@ -123,11 +122,11 @@ public class ventanaPrincipal  implements KeyListener, ActionListener {
 		movimientoArma.movimentoBaseArma();
 
 		initialize();
-
+		
 		//metemos los corazones
 		//logicaFondos corazon1 = new logicaFondos("/archivos/escudos/completo.png");
 		corazon= new logicaCorazones(vida);
-
+		
 		ventanaMenu.ln.identificarNivel();
 		//metodos para recuperar el foco y que las teclas funcionan
 		fondoJuego.setFocusable(true);
@@ -143,6 +142,7 @@ public class ventanaPrincipal  implements KeyListener, ActionListener {
 		//iniciamos las variables del boton pausa
 		pausar=true;
 		contador=true;
+		
 
 	}
 
@@ -196,6 +196,7 @@ public class ventanaPrincipal  implements KeyListener, ActionListener {
 		bPause.setIcon(new ImageIcon(ventanaPrincipal.class.getResource("/archivos/iconos/pause.png")));
 		bPause.addActionListener(this);
 		fondoControles.add(bPause);
+		
 	}
 
 	/**
@@ -204,7 +205,10 @@ public class ventanaPrincipal  implements KeyListener, ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource()==bSalir){
-			
+			System.out.println("SALIR");
+			window.frame.dispose();
+			funcionar=false;
+			ventanaGuardado.window.frame.setVisible(true);
 		}else if(e.getSource()==bPause){
 			if(contador==true){//pausamos hilos
 				fondoJuego.setBorder(new LineBorder(Color.RED, 4));

@@ -252,6 +252,7 @@ public class enemigoCinco {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+					ventanaPrincipal.window.frame.dispose();
 					ventanaEntreBatallas.window.reutilizar();
 					ventanaEntreBatallas.window.frame.setVisible(true);	
 					ventanaPrincipal.naveConjunta.setPosX((int) Math.floor(ventanaPrincipal.ancho * 0.5));
@@ -260,9 +261,9 @@ public class enemigoCinco {
 					ventanaPrincipal.naveConjunta.acelera(0);
 					esfera.setVisible(false);
 					
-					ventanaPrincipal.window.frame.dispose();
 					
-					System.out.println("enemigo uno parado");
+					
+					System.out.println("enemigo cinco parado");
 					funcionar=false;
 				
 				}

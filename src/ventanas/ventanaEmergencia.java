@@ -172,9 +172,9 @@ public class ventanaEmergencia implements KeyListener, ActionListener{
 			frame.validate();
 			frame.repaint();
 		}else if( e.getSource() == btnDefensa){
-			window.frame.dispose();
 			
-			ventanaMenu.ln = new logicaNivel(1);
+			window.frame.dispose();
+			ventanaMenu.ln = new logicaNivel(1,8);
 				
 		}
 	}
