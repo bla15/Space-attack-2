@@ -102,7 +102,7 @@ public class GestorBDusuarios {
 				obj.setUltimoPlaneta(rs.getString("ultimoPlaneta"));
 				obj.setDisparos(rs.getInt("disparos"));
 				obj.setDeads(rs.getInt("deads"));
-				obj.setScore(rs.getInt("deads"),rs.getInt("disparos"));
+				obj.setScore();
 				obj.setLife(rs.getInt("life"));
 				obj.setStatus(rs.getBoolean("status"));
 				obj.setCreated_at(rs.getDate("created_at"));

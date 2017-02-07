@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import logicaNegocio.logicaFotoMiNave;
 import logicaNegocio.movimiento.logicaEsfera;
+import ventanas.ventanaCampaña;
 import ventanas.ventanaEntreBatallas;
 import ventanas.ventanaMenu;
 import ventanas.ventanaPrincipal;
@@ -238,6 +239,7 @@ public class enemigoCinco {
 							muerte.setPosY(misEnemigos.get(i).getPosY());
 							misMuertes.add(muerte);
 							ventanaPrincipal.fondoJuego.add(muerte.getFotoEnemigo());
+							ventanaCampaña.miPartida.setDeads(ventanaCampaña.miPartida.getDeads()+1);
 							
 							tiempo.remove(i);
 							misEnemigos.remove(i);

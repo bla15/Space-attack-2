@@ -125,7 +125,7 @@ public class logicaNivel {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							ventanaGuardado.window = new ventanaGuardado();	
+							ventanaGuardado.window = new ventanaGuardado(carga);	
 						} catch (Exception e) {
 							e.printStackTrace();
 						}

@@ -133,6 +133,10 @@ public class ventanaCampaña implements KeyListener, ActionListener{
 		if(e.getSource()==btnNuevaCampaña) {
 			//creamos el objeto partida
 			miPartida=new partida();
+			miPartida.setDisparos(0);
+			miPartida.setDeads(0);
+			miPartida.setLife(8);
+			miPartida.setStatus(false);
 			//la ventan se oculta
 			window.frame.dispose();
 			

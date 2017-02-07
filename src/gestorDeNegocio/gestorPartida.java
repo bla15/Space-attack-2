@@ -27,7 +27,7 @@ public class gestorPartida {
 	 * @throws excepAnadirDupli En caso de que la partida a insertar en la base de datos ya exista
 	 * @throws ClassNotFoundException En caso de que no nos podamos conectar correctamente a la base de datos.
 	 */
-	public void addVehiculo(partida obj) throws  ClassNotFoundException {
+	public void addPartida(partida obj) throws  ClassNotFoundException {
 		cargarDatos();
 		objConversor.connect();
 		objConversor.addPartida(obj);

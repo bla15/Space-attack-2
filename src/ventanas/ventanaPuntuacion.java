@@ -53,6 +53,7 @@ public class ventanaPuntuacion implements KeyListener, ActionListener{
 	 */
 	public ventanaPuntuacion() {
 		initialize();
+		ventanaCampaña.miPartida.setStatus(true);
 	}
 
 	/**

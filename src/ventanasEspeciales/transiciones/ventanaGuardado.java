@@ -41,27 +41,14 @@ public class ventanaGuardado implements KeyListener, ActionListener{
 	
 	//elementos necesarios para poder guardar
 	private gestorPartida GP = new gestorPartida();
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					window = new ventanaGuardado();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private boolean carga;
 
 	/**
 	 * Create the application.
 	 */
-	public ventanaGuardado() {
+	public ventanaGuardado(boolean carga) {
 		initialize();
+		this.carga=carga;
 	}
 
 	/**
@@ -118,23 +105,41 @@ public class ventanaGuardado implements KeyListener, ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if( e.getSource() == btnGuardar){
-			//guardamos los valores en la variable usuario
-			ventanaCampaña.miPartida.setId_u(1);
-			ventanaCampaña.miPartida.setNombrePiloto("prueba");
-			ventanaCampaña.miPartida.setRaza("prueba");
-			ventanaCampaña.miPartida.setDisparos(100);
-			ventanaCampaña.miPartida.setDeads(50);
-			ventanaCampaña.miPartida.setScore(ventanaCampaña.miPartida.getDeads(), ventanaCampaña.miPartida.getDisparos());
-			ventanaCampaña.miPartida.setLife(ventanaPrincipal.vida);
-			ventanaCampaña.miPartida.setStatus(true);
-			java.util.Date utilDate = new java.util.Date();
-		    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-			ventanaCampaña.miPartida.setCreated_at(sqlDate);
-			ventanaCampaña.miPartida.setUpdated_at(sqlDate);
+			if(carga==true){
+				//guardamos los valores en la variable usuario
+				ventanaCampaña.miPartida.setId_u(ventanaLogging.usuarioActual.getId_u());
+				//ventanaCampaña.miPartida.setNombrePiloto("prueba");
+				//ventanaCampaña.miPartida.setRaza("prueba");
+				ventanaCampaña.miPartida.setDisparos(100);
+				ventanaCampaña.miPartida.setDeads(50);
+				ventanaCampaña.miPartida.setScore();
+				ventanaCampaña.miPartida.setLife(ventanaPrincipal.vida);
+				ventanaCampaña.miPartida.setStatus(true);
+				java.util.Date utilDate = new java.util.Date();
+			    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+				ventanaCampaña.miPartida.setCreated_at(sqlDate);
+				ventanaCampaña.miPartida.setUpdated_at(sqlDate);
+			}else if(carga==false){
+				
+				//guardamos los valores en la variable usuario
+				ventanaCampaña.miPartida.setId_u(ventanaLogging.usuarioActual.getId_u());
+				//ventanaCampaña.miPartida.setNombrePiloto("prueba");
+				//ventanaCampaña.miPartida.setRaza("prueba");
+				//ventanaCampaña.miPartida.setDisparos(100);
+				//ventanaCampaña.miPartida.setDeads(50);
+				ventanaCampaña.miPartida.setScore();
+				ventanaCampaña.miPartida.setLife(ventanaPrincipal.vida);
+				//ventanaCampaña.miPartida.setStatus(flase);
+				java.util.Date utilDate = new java.util.Date();
+			    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+				ventanaCampaña.miPartida.setCreated_at(sqlDate);
+				ventanaCampaña.miPartida.setUpdated_at(sqlDate);
+			}
+			
 			
 			//guardamos la partida en la BD
 			try {
-				GP.addVehiculo(ventanaCampaña.miPartida);
+				GP.addPartida(ventanaCampaña.miPartida);
 			} catch (ClassNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

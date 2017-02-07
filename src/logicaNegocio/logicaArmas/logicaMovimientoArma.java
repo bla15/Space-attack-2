@@ -1,6 +1,7 @@
 package logicaNegocio.logicaArmas;
 
 
+import ventanas.ventanaCampaña;
 import ventanas.ventanaPrincipal;
 
 
@@ -64,6 +65,7 @@ public class logicaMovimientoArma {
 						}
 						//lo añadimos al arrayList de lasers
 						ventanaPrincipal.misProyectiles.add(ventanaPrincipal.unProyectil);
+						ventanaCampaña.miPartida.setDisparos(ventanaCampaña.miPartida.getDisparos()+1);
 						//Ponemos la variable a falso
 						ventanaPrincipal.disparo = false;
 					}

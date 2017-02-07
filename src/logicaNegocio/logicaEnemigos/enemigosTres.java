@@ -4,6 +4,7 @@ import java.awt.geom.Area;
 import java.util.ArrayList;
 
 import logicaNegocio.logicaFotoMiNave;
+import ventanas.ventanaCampaña;
 import ventanas.ventanaEntreBatallas;
 import ventanas.ventanaMenu;
 import ventanas.ventanaPrincipal;
@@ -187,6 +188,7 @@ public class enemigosTres {
 									muerte.setPosY(misEnemigos.get(i).getPosY());
 									misMuertes.add(muerte);
 									ventanaPrincipal.fondoJuego.add(muerte.getFotoEnemigo());
+									ventanaCampaña.miPartida.setDeads(ventanaCampaña.miPartida.getDeads()+1);
 									
 									misEnemigos.remove(i);
 								}

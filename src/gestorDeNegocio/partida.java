@@ -53,8 +53,8 @@ public class partida {
 	public int getScore() {
 		return score;
 	}
-	public void setScore(int deads, int disparos) {
-		this.score = calcularScore(disparos, deads);
+	public void setScore() {
+		this.score = calcularScore();
 	}
 	public int getLife() {
 		return life;
@@ -80,9 +80,10 @@ public class partida {
 	public void setUpdated_at(Date updated_at) {
 		this.updated_at = updated_at;
 	}
-	public int calcularScore(int deads, int dispars){
+	public int calcularScore(){
 		int score;
-		score= deads/disparos* 100 ;
+		
+		score= (deads*100)/disparos ;
 		return score;
 	}
 	

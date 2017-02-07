@@ -8,6 +8,7 @@ import logicaNegocio.logicaEnemigos.enemigoUno.hiloChoques;
 import logicaNegocio.logicaEnemigos.enemigoUno.hiloCreacionEnemigos;
 import logicaNegocio.logicaEnemigos.enemigoUno.hiloMovimiento;
 import logicaNegocio.logicaEnemigos.enemigoUno.hiloMovimientoMuertes;
+import ventanas.ventanaCampaña;
 import ventanas.ventanaEntreBatallas;
 import ventanas.ventanaMenu;
 import ventanas.ventanaMuerte;
@@ -209,6 +210,7 @@ public class enemigoDos {
 								muerte.setPosY(misEnemigos.get(i).getPosY());
 								misMuertes.add(muerte);
 								ventanaPrincipal.fondoJuego.add(muerte.getFotoEnemigo());
+								ventanaCampaña.miPartida.setDeads(ventanaCampaña.miPartida.getDeads()+1);
 								
 								misEnemigos.remove(i);
 							}

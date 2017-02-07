@@ -189,7 +189,7 @@ public class enemigoUno {
 								muerte.setPosY(misEnemigos.get(i).getPosY());
 								misMuertes.add(muerte);
 								ventanaPrincipal.fondoJuego.add(muerte.getFotoEnemigo());
-								
+								ventanaCampaña.miPartida.setDeads(ventanaCampaña.miPartida.getDeads()+1);
 								misEnemigos.remove(i);
 							}
 						}
