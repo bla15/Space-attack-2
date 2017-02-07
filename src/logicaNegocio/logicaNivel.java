@@ -13,6 +13,7 @@ import logicaNegocio.logicaEnemigos.enemigoSeis;
 import logicaNegocio.logicaEnemigos.enemigoUno;
 import logicaNegocio.logicaEnemigos.enemigosTres;
 import logicaNegocio.logicaEnemigos.enemigoUno.hiloChoques;
+import ventanas.ventanaCampaña;
 import ventanas.ventanaEntreBatallas;
 import ventanas.ventanaFinal;
 import ventanas.ventanaMenu;
@@ -172,6 +173,26 @@ public class logicaNivel {
 		}else{
 			enemigoSix = new enemigoSeis();
 		}
+	}
+	/**
+	 * Metodo para identificar en que planeta estamos
+	 */
+	public String  miNivel(){
+		String planeta;
+		if(nivel==1){
+			planeta="Tumbr";
+		}else if(nivel==2){
+			planeta="Axion";
+		}else if(nivel==3){
+			planeta="Blor";
+		}else if(nivel==4){
+			planeta="Hell";
+		}else if(nivel==5){
+			planeta="Shadow";
+		}else{
+			planeta="Logic";
+		}
+		return planeta;
 	}
 	/**
 	 * Metodo encaegado de realizar el cambio

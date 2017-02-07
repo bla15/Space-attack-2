@@ -208,7 +208,7 @@ public class enemigoCuatro {
 						
 					}
 				}
-				if((ventanaMenu.ln.cambioMapa==false)&& misEnemigos.size()==0 && misMuertes.size()==0){
+				if((ventanaMenu.ln.cambioMapa==false)&& misEnemigos.size()==0 && misMuertes.size()==0 && ventanaPrincipal.funcionar==true){
 					try {
 						hiloChoques.sleep(2000);
 					} catch (InterruptedException e) {

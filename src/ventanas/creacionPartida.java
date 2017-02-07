@@ -20,7 +20,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
-import logicaNegocio.partidasLN;
 import logicaVentanas.logicaFondos;
 
 import javax.swing.BoxLayout;
@@ -52,7 +51,6 @@ public class creacionPartida implements KeyListener, ActionListener{
 	private JButton btnContinuar;
 	private JButton btnAtras;
 	
-	public static partidasLN miPartida = new partidasLN();
 
 	/**
 	 * Launch the application.
@@ -210,33 +208,34 @@ public class creacionPartida implements KeyListener, ActionListener{
 			panelCaldari.setBorder(null);
 			panelGallente.setBorder(null);
 			panelMinmatar.setBorder(null);
-			miPartida.setRaza("Amarr");
+			ventanaCampaña.miPartida.setRaza("Amar");
 
 		} else if (e.getSource() == btnCaldari) {
 			panelAmarr.setBorder(null);
 			panelCaldari.setBorder(new LineBorder(Color.BLUE, 4));
 			panelGallente.setBorder(null);
 			panelMinmatar.setBorder(null);
-			miPartida.setRaza("Caldari");
+			ventanaCampaña.miPartida.setRaza("Caldari");
 
 		} else if (e.getSource() == btnGallente) {
 			panelAmarr.setBorder(null);
 			panelCaldari.setBorder(null);
 			panelGallente.setBorder(new LineBorder(Color.BLUE, 4));
 			panelMinmatar.setBorder(null);
-			miPartida.setRaza("Gallente");
+			ventanaCampaña.miPartida.setRaza("Gallente");
 
 		} else if (e.getSource() == btnMinmatar) {
 			panelAmarr.setBorder(null);
 			panelCaldari.setBorder(null);
 			panelGallente.setBorder(null);
 			panelMinmatar.setBorder(new LineBorder(Color.BLUE, 4));
-			miPartida.setRaza("Minmatar");
+			ventanaCampaña.miPartida.setRaza("Minmatar");
 
 		} else if( e.getSource() == btnContinuar){
-			if((textNombre.getText().length() != 0) && (miPartida.getRaza() !=  null)){
-				miPartida.setNombreComandante(textNombre.getText());
-				System.out.println("SUIIII");
+			if((textNombre.getText().length() != 0) && (ventanaCampaña.miPartida.getRaza() !=  null)){
+				//llenamos los campos de la partida
+				ventanaCampaña.miPartida.setNombrePiloto(textNombre.getText());
+				
 				window.frame.dispose();
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {

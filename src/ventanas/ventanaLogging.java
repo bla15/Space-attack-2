@@ -1,6 +1,7 @@
 package ventanas;
 
 import gestorDeNegocio.gestorUsuario;
+import gestorDeNegocio.usuario;
 
 import java.awt.Color;
 import java.awt.Desktop;
@@ -57,6 +58,9 @@ public class ventanaLogging implements KeyListener, ActionListener {
     private JButton btnSalir;
     
     static String[] argumentos;
+    
+    //mi usuario
+    public static usuario usuarioActual;
 
 	/**
 	 * Launch the application.
@@ -181,6 +185,8 @@ public class ventanaLogging implements KeyListener, ActionListener {
 			try {
 				if(GU.comprobar(nick, password)){
 					
+					usuarioActual=GU.usuarioActual(nick, password);
+					System.out.println("El id del usuario es: "+ usuarioActual.getId_u());
 					window.frame.dispose();
 					String ruta = "archivos\\videos\\videoPresentacion.mp4";
 					musica.acabarCancion();

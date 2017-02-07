@@ -1,5 +1,7 @@
 package ventanas;
 
+import gestorDeNegocio.partida;
+
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -33,6 +35,9 @@ public class ventanaCampaña implements KeyListener, ActionListener{
     private JButton btnAtras;
     
     static String[] argumentos;
+    
+    //objeto partida
+    public static partida miPartida;
     
     
 	/**
@@ -126,9 +131,15 @@ public class ventanaCampaña implements KeyListener, ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource()==btnNuevaCampaña) {
+			//creamos el objeto partida
+			miPartida=new partida();
+			//la ventan se oculta
 			window.frame.dispose();
+			
+			//acabamos con la musica
 			ventanaLogging.musica.acabarCancion();
 			String ruta = "archivos\\videos\\starCampaign.mp4";
+			
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
@@ -141,6 +152,7 @@ public class ventanaCampaña implements KeyListener, ActionListener{
 			});;
 			
 		}else if(e.getSource()==btnCargarCampaña) {
+			miPartida=new partida();
 			window.frame.dispose();
 			//ventanaLogging.musica.acabarCancion();
 			pruebasCargarPartida mp = new pruebasCargarPartida();

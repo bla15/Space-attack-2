@@ -37,6 +37,10 @@ public class logicaCambio {
 
 	public class hiloCambios extends Thread{
 		public void run(){
+			try {
+		        Thread.sleep(10); // for 100 FPS
+		    } catch (InterruptedException ignore) {
+		    }
 			while(funcionar){
 				try {
 			        Thread.sleep(10); // for 100 FPS
