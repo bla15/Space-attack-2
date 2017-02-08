@@ -54,7 +54,12 @@ public class partida {
 		return score;
 	}
 	public void setScore() {
-		this.score = calcularScore();
+		if(disparos==0){
+			score=0;
+		}else{
+			this.score = calcularScore();
+		}
+		
 	}
 	public int getLife() {
 		return life;

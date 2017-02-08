@@ -141,5 +141,47 @@ public class GestorBDusuarios {
 		}
 		return usuarios;
 	}
+	
+	/**
+	 * Se obtiene una lista de las partidas guardadas del usuario que esta registrado
+	 * @param id_u
+	 *            Id del usuario para sacar solo las partidas que le corresponden
+	 * @return HashSet<partidas> devuelve una lista de las partidas que sean del usuario
+	 */
+	public HashSet<partida> listarPartidasUsuario (int id_u) {
+		final HashSet<partida> partidas = new HashSet<partida>();
+		
+		Statement stat;
+		try {
+			stat = con.createStatement();
+			ResultSet rs = stat.executeQuery("select * from PARTIDAS WHERE user_id= " + id_u);
+			
+			while (rs.next()) {
+				final partida obj = new partida();
+				obj.setId_partida(rs.getInt("id"));
+				obj.setId_u(rs.getInt("user_id"));
+				obj.setNombrePiloto(rs.getString("nombrePiloto"));
+				obj.setRaza(rs.getString("raza"));
+				obj.setUltimoPlaneta(rs.getString("ultimoPlaneta"));
+				obj.setDisparos(rs.getInt("disparos"));
+				obj.setDeads(rs.getInt("deads"));
+				obj.setScore();
+				obj.setLife(rs.getInt("life"));
+				obj.setStatus(rs.getBoolean("status"));
+				obj.setCreated_at(rs.getDate("created_at"));
+				obj.setUpdated_at(rs.getDate("updated_at"));
+				
+				partidas.add(obj);
+			}
+			rs.close();
+			stat.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return partidas;
+	}
 
 }

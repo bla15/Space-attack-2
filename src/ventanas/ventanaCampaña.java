@@ -153,13 +153,24 @@ public class ventanaCampaña implements KeyListener, ActionListener{
 						e.printStackTrace();
 					}
 				}
-			});;
+			});
 			
 		}else if(e.getSource()==btnCargarCampaña) {
 			miPartida=new partida();
 			window.frame.dispose();
 			//ventanaLogging.musica.acabarCancion();
-			pruebasCargarPartida mp = new pruebasCargarPartida();
+			//pruebasCargarPartida mp = new pruebasCargarPartida();
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					try {
+						ventanaCargaPartida.window = new ventanaCargaPartida();
+						ventanaCargaPartida.window.frame.setVisible(true);	
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
+			
 			
 		}else if(e.getSource()==btnAtras) {
 			window.frame.dispose();

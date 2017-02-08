@@ -274,6 +274,7 @@ public class logicaNivel {
 			cambioMapa = true;
 			ventanaPuntuacion.window.frame.setVisible(true);
 			ventanaPrincipal.funcionar=false;
+			ventanaCampaña.miPartida.setStatus(true);
 		}
 	}
 	/**

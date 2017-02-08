@@ -114,7 +114,7 @@ public class ventanaGuardado implements KeyListener, ActionListener{
 				ventanaCampaña.miPartida.setDeads(50);
 				ventanaCampaña.miPartida.setScore();
 				ventanaCampaña.miPartida.setLife(ventanaPrincipal.vida);
-				ventanaCampaña.miPartida.setStatus(true);
+				//ventanaCampaña.miPartida.setStatus(false);
 				java.util.Date utilDate = new java.util.Date();
 			    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 				ventanaCampaña.miPartida.setCreated_at(sqlDate);

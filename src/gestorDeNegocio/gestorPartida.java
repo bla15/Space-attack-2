@@ -33,5 +33,18 @@ public class gestorPartida {
 		objConversor.addPartida(obj);
 		objConversor.disconnect();
 	}
+	
+	/**
+	 * 
+	 * @param id_u parametro cuya utilidad es identificar al usuario registrado
+	 * @return Devuelve todas las partidas que se han guardado para ese usuario
+	 */
+	public HashSet<partida> obtenerPartidasUsuario(int id_u) {
+		objConversor.connect();
+		HashSet<partida> listaPartidasUsuario = objConversor.listarPartidasUsuario(id_u);
+		objConversor.disconnect();
+		
+		return listaPartidasUsuario;
+	}
 
 }
