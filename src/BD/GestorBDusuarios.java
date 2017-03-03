@@ -82,6 +82,45 @@ public class GestorBDusuarios {
 			System.out.println("Problema al crear la partida: " + e);
 		}
 	}
+	
+	/**
+	 * Se Introducen los cambios de la partida en la base de datos
+	 * 
+	 * @param obj
+	 *            Se recibe un objeto partida con los datos ya actulizados, es
+	 *            decir, con el mismo ID de antes.
+	 */
+	public void modifyPartida(final partida obj) {
+
+		try {
+			
+			PreparedStatement stat = con.prepareStatement(
+					"update partidas set nombrePiloto=? , raza=? , ultimoPlaneta=? , disparos=?, deads=?, score=?, life=?, status=?, created_at=?, updated_at=? where id=?");
+			
+
+			//stat.setInt(1, obj.getId_u());
+			stat.setString(1, obj.getNombrePiloto());
+			stat.setString(2, obj.getRaza());
+			stat.setString(3, obj.getUltimoPlaneta());
+			stat.setInt(4, obj.getDisparos());
+			stat.setInt(5, obj.getDeads());
+			stat.setInt(6, obj.getScore());
+			stat.setInt(7, obj.getLife());
+			stat.setBoolean(8, obj.isStatus());
+			stat.setDate(9, obj.getCreated_at());
+			stat.setDate(10, obj.getUpdated_at());
+			stat.setInt(11, obj.getId_partida());
+
+			stat.executeUpdate();
+			stat.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		}
+
+	}
+	
 	/**
 	 * Se devuelve la lista de vehiculos que existen en la base de datos
 	 * 

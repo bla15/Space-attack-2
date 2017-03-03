@@ -16,7 +16,7 @@ public class pruebasCargarPartida {
 		miPartida.setUltimoPlaneta("z");
 		miPartida.setLife(3);
 		
-		ventanaMenu.ln = new logicaNivel(5,miPartida.getLife());
+		//ventanaMenu.ln = new logicaNivel(5,miPartida.getLife(),true);
 	}
 	
 }

@@ -42,7 +42,7 @@ public class ventanaCargaPartida implements KeyListener, ActionListener{
     //elementos de la tabla
     DefaultTableModel modelo;
     private JTable tabla;
-    private String[] columnas = {"Piloto", "Raza", "Destino", "Disparos", "Muertes", "Puntuacion", "Vidas", "Guardado"};
+    private String[] columnas = {"Piloto", "Raza", "Destino", "Disparos", "Muertes", "Puntuacion", "Vidas", "Guardado", "Identificador", "Creacion", "Estado"};
     private int fila;
     
     //elementos necesarios para cargar la partida
@@ -131,9 +131,14 @@ public class ventanaCargaPartida implements KeyListener, ActionListener{
 		tabla.getColumnModel().getColumn(5).setCellRenderer( centerRenderer );
 		tabla.getColumnModel().getColumn(6).setCellRenderer( centerRenderer );
 		tabla.getColumnModel().getColumn(7).setCellRenderer( centerRenderer );
+		tabla.getColumnModel().getColumn(8).setCellRenderer( centerRenderer );
+		tabla.getColumnModel().getColumn(9).setCellRenderer( centerRenderer );
+		tabla.getColumnModel().getColumn(10).setCellRenderer( centerRenderer );
+	
 		
 		pa=GP.obtenerPartidasUsuario(ventanaLogging.usuarioActual.getId_u());
 		for( partida p :pa) {
+	
 			//solo mostramos aquellas partidas que no han sido finalizadas
 			if(p.isStatus()==false){
 				String vida="";
@@ -146,10 +151,22 @@ public class ventanaCargaPartida implements KeyListener, ActionListener{
 				}else if((p.getLife()>6)&&(p.getLife()<=8)){
 					vida="Cuatro escudos";
 				}
-				   modelo.addRow( new Object[] {p.getNombrePiloto(), p.getRaza(), p.getUltimoPlaneta(), p.getDisparos(),p.getDeads(), p.getScore(), vida, p.getUpdated_at()});   
+		
+				   modelo.addRow( new Object[] {p.getNombrePiloto(), p.getRaza(), p.getUltimoPlaneta(), p.getDisparos(),p.getDeads(), p.getScore(), vida, p.getUpdated_at(), p.getId_partida(),p.getCreated_at(), p.isStatus()});   
 	               modelo.fireTableDataChanged();
 			}
 		}
+		
+		//ocultamosl las columnas que no nos interesar mostrar
+		tabla.getColumnModel().getColumn(8).setMinWidth(0);
+		tabla.getColumnModel().getColumn(8).setMaxWidth(0);
+		
+		tabla.getColumnModel().getColumn(9).setMinWidth(0);
+		tabla.getColumnModel().getColumn(9).setMaxWidth(0);
+		
+		tabla.getColumnModel().getColumn(10).setMinWidth(0);
+		tabla.getColumnModel().getColumn(10).setMaxWidth(0);
+		
 		desplazamiento.setViewportView(tabla);
 		
 		tabla.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
@@ -180,6 +197,9 @@ public class ventanaCargaPartida implements KeyListener, ActionListener{
 	        	}
 	        	P.setLife((Integer)vida);
 	        	P.setUpdated_at((Date) tabla.getValueAt(tabla.getSelectedRow(), 7));
+	        	P.setId_partida((Integer) tabla.getValueAt(tabla.getSelectedRow(), 8));
+	        	P.setCreated_at((Date) tabla.getValueAt(tabla.getSelectedRow(), 9));
+	        	P.setStatus((boolean) tabla.getValueAt(tabla.getSelectedRow(), 10));
 			}
 			
 		  });
@@ -215,7 +235,8 @@ public class ventanaCargaPartida implements KeyListener, ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if( e.getSource() == btnCargar){
-			int planeta=6;
+			System.out.println("Planeta cargado es :"+ P.getUltimoPlaneta());
+			int planeta=1;
 			if(P.getUltimoPlaneta().equals("Tumbr")){
 				planeta=1;
 			}else if(P.getUltimoPlaneta().equals("Axion")){
@@ -230,7 +251,12 @@ public class ventanaCargaPartida implements KeyListener, ActionListener{
 				planeta=6;
 			}
 			window.frame.dispose();
-			ventanaMenu.ln = new logicaNivel(5,vida);
+			
+			//cargamos los datos en la variable glabal de partida
+			ventanaCampaña.miPartida=P;
+			//creamos la partida
+			ventanaMenu.ln = new logicaNivel(planeta,vida,true);
+			
 		}else if(e.getSource() == btnAtras){
 			this.window.frame.dispose();
 			EventQueue.invokeLater(new Runnable() {

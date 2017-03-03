@@ -1,11 +1,9 @@
 /BD/
 /archivos/
+/contraseñas/
+/gestorDeNegocio/
 /logicaNegocio/
 /logicaVentanas/
+/pruebas/
 /ventanas/
 /ventanasEspeciales/
-/gestorDeDatos/
-/gestorDeNegocio/
-/conversorContraseñas.class
-/contraseñas/
-/pruebas/

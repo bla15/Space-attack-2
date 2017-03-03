@@ -46,5 +46,16 @@ public class gestorPartida {
 		
 		return listaPartidasUsuario;
 	}
+	
+	/**
+	 * Se modifica la partida con los nuevos datos que se pasan por parametro.
+	 * @param obj La partida que se quiere modificar ya con los datos actulizados
+	 * @throws ClassNotFoundException En caso de que no nos podamos conectar correctamente a la base de datos.
+	 */
+	public void modificarPartida(partida obj) throws ClassNotFoundException {
+		objConversor.connect();
+		objConversor.modifyPartida(obj);
+		objConversor.disconnect();
+	}
 
 }

@@ -106,19 +106,22 @@ public class ventanaGuardado implements KeyListener, ActionListener{
 		// TODO Auto-generated method stub
 		if( e.getSource() == btnGuardar){
 			if(carga==true){
-				//guardamos los valores en la variable usuario
-				ventanaCampaña.miPartida.setId_u(ventanaLogging.usuarioActual.getId_u());
-				//ventanaCampaña.miPartida.setNombrePiloto("prueba");
-				//ventanaCampaña.miPartida.setRaza("prueba");
-				ventanaCampaña.miPartida.setDisparos(100);
-				ventanaCampaña.miPartida.setDeads(50);
+				
+				//calculamos el nuevo score, la vida que queda y la nueva fecha de modificacion
 				ventanaCampaña.miPartida.setScore();
 				ventanaCampaña.miPartida.setLife(ventanaPrincipal.vida);
-				//ventanaCampaña.miPartida.setStatus(false);
 				java.util.Date utilDate = new java.util.Date();
 			    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-				ventanaCampaña.miPartida.setCreated_at(sqlDate);
-				ventanaCampaña.miPartida.setUpdated_at(sqlDate);
+			    ventanaCampaña.miPartida.setUpdated_at(sqlDate);
+			    try {
+			    	GP.modificarPartida(ventanaCampaña.miPartida);
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					
+					System.out.println(e1);
+				}
+
 			}else if(carga==false){
 				
 				//guardamos los valores en la variable usuario
@@ -134,16 +137,16 @@ public class ventanaGuardado implements KeyListener, ActionListener{
 			    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 				ventanaCampaña.miPartida.setCreated_at(sqlDate);
 				ventanaCampaña.miPartida.setUpdated_at(sqlDate);
+				
+				//guardamos la partida en la BD
+				try {
+					GP.addPartida(ventanaCampaña.miPartida);
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 			
-			
-			//guardamos la partida en la BD
-			try {
-				GP.addPartida(ventanaCampaña.miPartida);
-			} catch (ClassNotFoundException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
 			System.out.println("ADIOS");
 			System.exit(0);
 		}else if( e.getSource() == btnNoGuardar){

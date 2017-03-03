@@ -41,7 +41,7 @@ public class logicaNivel {
 	enemigoCinco enemigoFive;
 	enemigoSeis enemigoSix;
 	
-	//booleano dee partida cargada
+	//booleano de partida cargada
 	boolean carga = false;
 	//int que nos dice el numero de vidas
 	int vidas;
@@ -51,7 +51,7 @@ public class logicaNivel {
 	/**
 	 *Constructor de clase
 	 */
-	public logicaNivel(int nivel, int vidas) {
+	public logicaNivel(int nivel, int vidas, boolean carga) {
 		// TODO Auto-generated constructor stub
 		this.nivel=nivel;
 		this.vidas=8;
@@ -59,6 +59,7 @@ public class logicaNivel {
 			carga=true;
 			this.vidas=vidas;
 		}
+		this.carga=carga;
 		
 		crearPartida();
 	}
@@ -178,6 +179,7 @@ public class logicaNivel {
 	 * Metodo para identificar en que planeta estamos
 	 */
 	public String  miNivel(){
+		System.out.println("El nivel es: "+ nivel);
 		String planeta;
 		if(nivel==1){
 			planeta="Tumbr";
@@ -198,6 +200,7 @@ public class logicaNivel {
 	 * Metodo encaegado de realizar el cambio
 	 */
 	public void cambio(){
+		System.out.println("Aumento");
 		nivel++;
 		cambioMapa = false;
 		lc.setPausa2(false);
@@ -295,6 +298,6 @@ public class logicaNivel {
 	}
 	
 	public static void main(String[] args) {
-		logicaNivel ln = new logicaNivel(1,8);
+		logicaNivel ln = new logicaNivel(1,8,false);
 	}
 }

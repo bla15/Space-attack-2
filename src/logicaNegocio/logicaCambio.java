@@ -12,19 +12,19 @@ public class logicaCambio {
 	boolean pausa2 = true;
 	long tiempoAlEmpezar;
 	long tiempoMapa2;
-	public static boolean funcionar= true;
+	public static boolean funcionar;
 	public static boolean pausar= true;
 	
 	/*
 	 * Constructor de la clase 
 	 */
 	public logicaCambio(){
+			funcionar=ventanaPrincipal.funcionar;
+			tiempoAlEmpezar=(int) System.currentTimeMillis();
+			//control de los hilos
+			hiloCambios miHiloCambios = new hiloCambios(); 
+			miHiloCambios.start();
 		
-		tiempoAlEmpezar=(int) System.currentTimeMillis();
-		
-		//control de los hilos
-		hiloCambios miHiloCambios = new hiloCambios(); 
-		miHiloCambios.start();
 	}
 	
 	public boolean isPausa2() {
@@ -41,6 +41,7 @@ public class logicaCambio {
 		        Thread.sleep(10); // for 100 FPS
 		    } catch (InterruptedException ignore) {
 		    }
+			System.out.println(funcionar);
 			while(funcionar){
 				try {
 			        Thread.sleep(10); // for 100 FPS

@@ -205,12 +205,13 @@ public class ventanaPrincipal  implements KeyListener, ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource()==bSalir){
+			funcionar=false;
+			window.frame.dispose();
 			String ultimoPlaneta=ventanaMenu.ln.miNivel();
 			ventanaCampaña.miPartida.setUltimoPlaneta(ultimoPlaneta);
+			System.out.println(ultimoPlaneta);
 
 			System.out.println("SALIR");
-			window.frame.dispose();
-			funcionar=false;
 			ventanaGuardado.window.frame.setVisible(true);
 		}else if(e.getSource()==bPause){
 			
