@@ -214,7 +214,7 @@ public class ventanaPrincipal  implements KeyListener, ActionListener {
 			System.out.println("SALIR");
 			ventanaGuardado.window.frame.setVisible(true);
 		}else if(e.getSource()==bPause){
-			
+		
 			if(contador==true){//pausamos hilos
 				fondoJuego.setBorder(new LineBorder(Color.RED, 4));
 				contador=false;

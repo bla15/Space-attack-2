@@ -43,7 +43,12 @@ public class logicaMovimientoMiNave {
 
 		public void run(){
 			while(ventanaPrincipal.funcionar==true){
-				System.out.println(ventanaPrincipal.pausar);
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				while(ventanaPrincipal.pausar){
 					ventanaPrincipal.naveConjunta.mueve(0.040);
 					//movimiento de la nave hacia la izq

@@ -200,8 +200,9 @@ public class logicaNivel {
 	 * Metodo encaegado de realizar el cambio
 	 */
 	public void cambio(){
-		System.out.println("Aumento");
+		System.out.println("Cambio a: "+nivel+ " "+miNivel());
 		nivel++;
+		ventanaCampaña.miPartida.setUltimoPlaneta(miNivel());
 		cambioMapa = false;
 		lc.setPausa2(false);
 	}
@@ -287,7 +288,9 @@ public class logicaNivel {
 	public void muerte(int nivel){
 		ventanaPrincipal.funcionar=false;
 		ventanaPrincipal.window.frame.dispose();
-		ventanaMuerte.window.frame.setVisible(true);	
+		ventanaMuerte.window.actualizar();
+		ventanaMuerte.window.frame.setVisible(true);
+		ventanaMuerte.window.musicaMuerte();
 		
 	}
 	public int getNivel() {

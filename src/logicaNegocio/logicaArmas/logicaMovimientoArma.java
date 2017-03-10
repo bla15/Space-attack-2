@@ -44,9 +44,14 @@ public class logicaMovimientoArma {
 		public void run(){
 
 			while(ventanaPrincipal.funcionar==true){
-				//System.out.println(ventanaPrincipal.pausar);
+		
 				//usamos boton pausar
-			System.out.println(ventanaPrincipal.pausar);
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				while(ventanaPrincipal.pausar){
 					if(ventanaPrincipal.disparo==true){
 						ventanaPrincipal.unProyectil= new armaConjunto();

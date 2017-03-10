@@ -250,12 +250,14 @@ public class ventanaCargaPartida implements KeyListener, ActionListener{
 			}else if(P.getUltimoPlaneta().equals("Logic")){
 				planeta=6;
 			}
-			window.frame.dispose();
+			
 			
 			//cargamos los datos en la variable glabal de partida
 			ventanaCampaña.miPartida=P;
 			//creamos la partida
 			ventanaMenu.ln = new logicaNivel(planeta,vida,true);
+			
+			window.frame.dispose();
 			
 		}else if(e.getSource() == btnAtras){
 			this.window.frame.dispose();
