@@ -276,7 +276,9 @@ public class logicaNivel {
 			identificarNivel();
 		}else{
 			cambioMapa = true;
+			ventanaPuntuacion.window.actualizar();
 			ventanaPuntuacion.window.frame.setVisible(true);
+			ventanaPuntuacion.window.musicaVictoria();
 			ventanaPrincipal.funcionar=false;
 			ventanaCampaña.miPartida.setStatus(true);
 		}

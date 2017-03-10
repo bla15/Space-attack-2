@@ -48,6 +48,7 @@ public class ventanaCargaPartida implements KeyListener, ActionListener{
     //elementos necesarios para cargar la partida
     private gestorPartida GP = new gestorPartida();
 	private HashSet<partida> pa;
+	private HashSet<partida> mp;
 	private partida P = new partida();
 	private int vida=2;
     
@@ -137,6 +138,7 @@ public class ventanaCargaPartida implements KeyListener, ActionListener{
 	
 		
 		pa=GP.obtenerPartidasUsuario(ventanaLogging.usuarioActual.getId_u());
+		
 		for( partida p :pa) {
 	
 			//solo mostramos aquellas partidas que no han sido finalizadas

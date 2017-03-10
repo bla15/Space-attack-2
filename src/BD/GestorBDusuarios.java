@@ -122,15 +122,15 @@ public class GestorBDusuarios {
 	}
 	
 	/**
-	 * Se devuelve la lista de vehiculos que existen en la base de datos
+	 * Se devuelve la lista de partidas que existen en la base de datos
 	 * 
-	 * @return HashSet<Vehiculo> Con objetos Vehiculo.java
+	 * @return HashSet<Partida> Con objetos partida.java
 	 */
 	public HashSet<partida> listaPartidas() {
-		final HashSet<partida> vehiculos = new HashSet<partida>();
+		final HashSet<partida> partidas = new HashSet<partida>();
 		try {
 			Statement stat = con.createStatement();
-			ResultSet rs = stat.executeQuery("select * from partidas");
+			ResultSet rs = stat.executeQuery("select * from partidas ORDER BY score asc");
 
 			while (rs.next()) {
 				final partida obj = new partida();
@@ -147,13 +147,13 @@ public class GestorBDusuarios {
 				obj.setCreated_at(rs.getDate("created_at"));
 				obj.setUpdated_at(rs.getDate("updated_at"));
 				
-				vehiculos.add(obj);
+				partidas.add(obj);
 			}
 			rs.close();
 			stat.close();
 		} catch (SQLException e) {
 		}
-		return vehiculos;
+		return partidas;
 	}
 	
 	//cargamos todos los elementos de la tabla users

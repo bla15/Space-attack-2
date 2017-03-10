@@ -57,5 +57,18 @@ public class gestorPartida {
 		objConversor.modifyPartida(obj);
 		objConversor.disconnect();
 	}
+	
+	/**
+	 * 
+	 * @param id_u parametro cuya utilidad es identificar al usuario registrado
+	 * @return Devuelve todas las partidas que se han guardado para ese usuario
+	 */
+	public HashSet<partida> obtnerMejorPartida() {
+		objConversor.connect();
+		HashSet<partida> listaPartidas = objConversor.listaPartidas();
+		objConversor.disconnect();
+		
+		return listaPartidas;
+	}
 
 }
