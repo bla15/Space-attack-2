@@ -172,8 +172,6 @@ public class ventanaLogging implements KeyListener, ActionListener {
 		btnSalir.setBounds(10,((int)Math.floor(frame.getHeight()*0.98)-btnSalir.getHeight()), 48, 47);
 		btnSalir.addActionListener(this);
 		frame.getContentPane().add(btnSalir);
-		
-	
 	}
 
 	@Override

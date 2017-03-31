@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import logicaNegocio.logicaConjuntaMiNave;
 import logicaNegocio.logicaCorazones;
 import logicaNegocio.logicaFotoMiNave;
+import logicaNegocio.logicaMusicaPartida;
 import logicaNegocio.logicaArmas.armaConjunto;
 import logicaNegocio.logicaArmas.logicaMovimientoArma;
 import logicaNegocio.movimiento.logicaCoheteDerecho;
@@ -48,6 +49,9 @@ public class ventanaPrincipal  implements KeyListener, ActionListener {
     private String rutaFondo;
     public static logicaFondos fondoControles;
     public static JPanel panelCorazones;
+    
+    //ponemos la musica al juego
+    public static logicaMusicaPartida musicaJuego;
     
     private JButton bSalir;
 	private JButton bPause;
@@ -123,6 +127,10 @@ public class ventanaPrincipal  implements KeyListener, ActionListener {
 
 		initialize();
 		
+		
+		//ponemos la musica de fondo
+		musicaJuego = new logicaMusicaPartida();
+		
 		//metemos los corazones
 		//logicaFondos corazon1 = new logicaFondos("/archivos/escudos/completo.png");
 		corazon= new logicaCorazones(vida);
@@ -142,6 +150,7 @@ public class ventanaPrincipal  implements KeyListener, ActionListener {
 		//iniciamos las variables del boton pausa
 		pausar=true;
 		contador=true;
+		
 		
 
 	}
@@ -217,10 +226,12 @@ public class ventanaPrincipal  implements KeyListener, ActionListener {
 		
 			if(contador==true){//pausamos hilos
 				fondoJuego.setBorder(new LineBorder(Color.RED, 4));
+				musicaJuego.pausarCancion();
 				contador=false;
 				pausar=false;
 			}else{
 				fondoJuego.setBorder(null);
+				musicaJuego.reproducirCancion();
 				contador=true;
 				pausar=true;//despausamos los hilos
 				

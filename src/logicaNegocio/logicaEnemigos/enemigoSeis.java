@@ -255,6 +255,7 @@ public class hiloChoques extends Thread{
 				}
 				//ventanaEntreBatallas.window.reutilizar();
 				//ventanaEntreBatallas.window.frame.setVisible(true);
+				ventanaPrincipal.musicaJuego.acabarCancion();
 				ventanaPrincipal.window.frame.dispose();
 				ventanaFinal.window.frame.setVisible(true);
 				ventanaPrincipal.naveConjunta.setPosX((int) Math.floor(ventanaPrincipal.ancho * 0.5));

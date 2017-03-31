@@ -255,6 +255,7 @@ public class enemigoCinco {
 						e.printStackTrace();
 					}
 					ventanaPrincipal.window.frame.dispose();
+					ventanaPrincipal.musicaJuego.pausarCancion();
 					ventanaEntreBatallas.window.reutilizar();
 					ventanaEntreBatallas.window.frame.setVisible(true);	
 					ventanaPrincipal.naveConjunta.setPosX((int) Math.floor(ventanaPrincipal.ancho * 0.5));

@@ -204,6 +204,7 @@ public class enemigosTres {
 							e.printStackTrace();
 						}
 						ventanaPrincipal.window.frame.dispose();
+						ventanaPrincipal.musicaJuego.pausarCancion();
 						ventanaEntreBatallas.window.frame.setVisible(true);
 						ventanaPrincipal.naveConjunta.setPosX((int) Math.floor(ventanaPrincipal.ancho * 0.5));
 						ventanaPrincipal.naveConjunta.setPosY((int) Math.floor(ventanaPrincipal.alto * 0.80)-logicaFotoMiNave.getTAMAÑO());

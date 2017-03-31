@@ -236,7 +236,7 @@ public class logicaNivel {
 	
 
 	/**
-	 * Metodo encargado de cargar el nuevo mapa y poner la locic+a de cambio de mapa a cero
+	 * Metodo encargado de cargar el nuevo mapa y poner la logica de cambio de mapa a cero
 	 */
 	public void mapaNuevo(){
 		if(nivel==2){
@@ -244,6 +244,7 @@ public class logicaNivel {
 			lc.tiempoAlEmpezar=(int) System.currentTimeMillis();
 			ventanaPrincipal.fondoJuego.setCambio("/archivos/mapas/fondo2.jpg");
 			ventanaPrincipal.window.frame.setVisible(true);
+			ventanaPrincipal.musicaJuego.reproducirCancion();
 			lc.setPausa2(true);
 			identificarNivel();
 		}else if(nivel==3){
@@ -251,6 +252,7 @@ public class logicaNivel {
 			lc.tiempoAlEmpezar=(int) System.currentTimeMillis();
 			ventanaPrincipal.fondoJuego.setCambio("/archivos/mapas/fondo3.jpg");
 			ventanaPrincipal.window.frame.setVisible(true);
+			ventanaPrincipal.musicaJuego.reproducirCancion();
 			lc.setPausa2(true);
 			identificarNivel();
 		}else if(nivel==4){
@@ -258,6 +260,7 @@ public class logicaNivel {
 			lc.tiempoAlEmpezar=(int) System.currentTimeMillis();
 			ventanaPrincipal.fondoJuego.setCambio("/archivos/mapas/fondo4.jpg");
 			ventanaPrincipal.window.frame.setVisible(true);
+			ventanaPrincipal.musicaJuego.reproducirCancion();
 			lc.setPausa2(true);
 			identificarNivel();
 		}else if(nivel==5){
@@ -265,6 +268,7 @@ public class logicaNivel {
 			lc.tiempoAlEmpezar=(int) System.currentTimeMillis();
 			ventanaPrincipal.fondoJuego.setCambio("/archivos/mapas/fondo5.jpg");
 			ventanaPrincipal.window.frame.setVisible(true);
+			ventanaPrincipal.musicaJuego.reproducirCancion();
 			lc.setPausa2(true);
 			identificarNivel();
 		}else if(nivel==6){
@@ -272,6 +276,7 @@ public class logicaNivel {
 			lc.tiempoAlEmpezar=(int) System.currentTimeMillis();
 			ventanaPrincipal.fondoJuego.setCambio("/archivos/mapas/fondo6.jpg");
 			ventanaPrincipal.window.frame.setVisible(true);
+			ventanaPrincipal.musicaJuego.reproducirCancion();
 			lc.setPausa2(true);
 			identificarNivel();
 		}else{
@@ -284,12 +289,13 @@ public class logicaNivel {
 		}
 	}
 	/**
-	 * Metodo encargado de cargar el nuevo mapa y poner la locic+a de cambio de mapa a cero
+	 * Metodo encargado de cargar el nuevo mapa y poner la logica de cambio de mapa a cero
 	 * @param nivel, le pasamo el nivel en el que estamos
 	 */
 	public void muerte(int nivel){
 		ventanaPrincipal.funcionar=false;
 		ventanaPrincipal.window.frame.dispose();
+		ventanaPrincipal.musicaJuego.acabarCancion();
 		ventanaMuerte.window.actualizar();
 		ventanaMuerte.window.frame.setVisible(true);
 		ventanaMuerte.window.musicaMuerte();
