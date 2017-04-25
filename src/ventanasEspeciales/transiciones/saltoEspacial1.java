@@ -104,7 +104,7 @@ public class saltoEspacial1 implements KeyListener, ActionListener{
 	}
 	public void llegada(){
 		panelFondo2.setCambio("/archivos/mapas/fondo1.jpg");
-		
+		ventanaLogging.musica.acabarCancion();
 		btnContinuar = new JButton("continuar");
 		btnContinuar.setSize(260,50);
 		btnContinuar.setBackground(Color.GREEN);
@@ -135,6 +135,7 @@ public class saltoEspacial1 implements KeyListener, ActionListener{
 				}else if(cuentaAtras==-2){
 					System.out.println(cuentaAtras);
 					llegada();
+					break;
 				}
 				cuentaAtras--;	
 				try {
