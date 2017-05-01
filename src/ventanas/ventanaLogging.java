@@ -107,13 +107,13 @@ public class ventanaLogging implements KeyListener, ActionListener {
 		frame.setBounds( (ancho/2)-frame.getWidth()/2, (alto/2)-frame.getHeight()/2, 700,450);
 		frame.setResizable(false); 
 		
-		logicaFondos fotoLogging = new logicaFondos("/imagenes/logg.jpg");
+		logicaFondos fotoLogging = new logicaFondos("/archivos/imagenes/logg.jpg");
 		fotoLogging.setBorder(new LineBorder(Color.BLUE));
 		fotoLogging.setSize(159,113);
 		fotoLogging.setBounds((int)Math.floor(frame.getWidth()*0.9)-fotoLogging.getWidth(), (int)Math.floor(frame.getHeight()*0.1), 159, 113);
 		frame.getContentPane().add(fotoLogging);
 		
-		logicaFondos fotoSolLogging = new logicaFondos("/imagenes/sol.png");
+		logicaFondos fotoSolLogging = new logicaFondos("/archivos/imagenes/sol.png");
 		fotoSolLogging.setSize(200,150);
 		fotoSolLogging.setBounds(3, 3, 200, 150);
 		frame.getContentPane().add(fotoSolLogging);
@@ -155,7 +155,7 @@ public class ventanaLogging implements KeyListener, ActionListener {
 		panelCentral.add(textPass);
 		
 		btnEntrar= new JButton("");
-		btnEntrar.setIcon(new ImageIcon(ventanaLogging.class.getResource("/imagenes/botones/btnAdelante.png")));
+		btnEntrar.setIcon(new ImageIcon(ventanaLogging.class.getResource("/archivos/botones/btnAdelante.png")));
 		btnEntrar.setBounds(410, 376, 100, 23);
 		btnEntrar.addActionListener(this);
 		frame.getContentPane().add(btnEntrar);
@@ -167,7 +167,7 @@ public class ventanaLogging implements KeyListener, ActionListener {
 		frame.getContentPane().add(btnRegistrarse);
 		
 		btnSalir = new JButton("");
-		btnSalir.setIcon(new ImageIcon(ventanaLogging.class.getResource("/imagenes/botones/btnSalir.png")));
+		btnSalir.setIcon(new ImageIcon(ventanaLogging.class.getResource("/archivos/botones/btnSalir.png")));
 		btnSalir.setSize(48, 47);
 		btnSalir.setBounds(10,((int)Math.floor(frame.getHeight()*0.98)-btnSalir.getHeight()), 48, 47);
 		btnSalir.addActionListener(this);
