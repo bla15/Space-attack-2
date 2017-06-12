@@ -51,7 +51,7 @@ public class logicaNivel {
 	/**
 	 *Constructor de clase
 	 */
-	public logicaNivel(int nivel, int vidas, boolean carga) {
+	public logicaNivel(int nivel, int vidas) {
 		// TODO Auto-generated constructor stub
 		this.nivel=nivel;
 		this.vidas=8;
@@ -201,8 +201,9 @@ public class logicaNivel {
 	 */
 	public void cambio(){
 		System.out.println("Cambio a: "+nivel+ " "+miNivel());
-		nivel++;
+		
 		ventanaCampaña.miPartida.setUltimoPlaneta(miNivel());
+		nivel++;
 		cambioMapa = false;
 		lc.setPausa2(false);
 	}
@@ -309,6 +310,6 @@ public class logicaNivel {
 	}
 	
 	public static void main(String[] args) {
-		logicaNivel ln = new logicaNivel(1,8,false);
+		logicaNivel ln = new logicaNivel(1,8);
 	}
 }

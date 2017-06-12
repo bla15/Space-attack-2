@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -19,7 +20,7 @@ import ventanas.ventanaCampaña;
 import ventanas.ventanaEmergencia;
 import ventanas.ventanaLogging;
 import ventanas.ventanaMenu;
-import ventanas.ventanaVideoPresent.hiloVideo;
+
 
 public class saltoEspacial1 implements KeyListener, ActionListener{
 
@@ -72,6 +73,7 @@ public class saltoEspacial1 implements KeyListener, ActionListener{
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setIconImage(new ImageIcon(getClass().getResource("/archivos/imagenes/SpaceAttack.png")).getImage());
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);

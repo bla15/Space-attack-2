@@ -15,6 +15,7 @@ import javax.swing.border.LineBorder;
 import logicaNegocio.logicaNivel;
 import logicaVentanas.logicaFondos;
 
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -66,6 +67,7 @@ public class ventanaMenu implements KeyListener, ActionListener{
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setIconImage(new ImageIcon(getClass().getResource("/archivos/imagenes/SpaceAttack.png")).getImage());
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -101,15 +103,10 @@ public class ventanaMenu implements KeyListener, ActionListener{
 		panelCentral.setLayout(null);
 		panelCentral.add(btnCampaña);
 		
-		btnOpciones = new JButton("Opciones");
-		btnOpciones.setFont(new Font("Arial Black", Font.PLAIN, 30));
-		btnOpciones.setBounds(panelCentral.getWidth()/2-btnCampaña.getWidth()/2,(int) Math.floor(panelCentral.getWidth()*0.5),200,50);
-		btnOpciones.addActionListener(this);
-		panelCentral.add(btnOpciones);
 		
 		btnSalir = new JButton("Salir");
 		btnSalir.setFont(new Font("Arial Black", Font.PLAIN, 30));
-		btnSalir.setBounds(panelCentral.getWidth()/2-btnCampaña.getWidth()/2,(int) Math.floor(panelCentral.getWidth()*0.8),200,50);
+		btnSalir.setBounds(panelCentral.getWidth()/2-btnCampaña.getWidth()/2,(int) Math.floor(panelCentral.getWidth()*0.5),200,50);
 		btnSalir.addActionListener(this);
 		panelCentral.add(btnSalir);
 		

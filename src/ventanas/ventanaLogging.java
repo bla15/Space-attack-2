@@ -37,7 +37,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 
 import ventanasEspeciales.videos.reproductor;
-import BD.usersDB;
+
 
 
 public class ventanaLogging implements KeyListener, ActionListener {
@@ -97,6 +97,7 @@ public class ventanaLogging implements KeyListener, ActionListener {
 		 * Personalizamos el frame
 		 */
 		frame = new JFrame();
+		frame.setIconImage(new ImageIcon(getClass().getResource("/archivos/imagenes/SpaceAttack.png")).getImage());
 		frame.getContentPane().setBackground(Color.BLACK);
 		frame.getContentPane().setLayout(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

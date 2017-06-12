@@ -130,7 +130,7 @@ public class GestorBDusuarios {
 		final HashSet<partida> partidas = new HashSet<partida>();
 		try {
 			Statement stat = con.createStatement();
-			ResultSet rs = stat.executeQuery("select * from partidas ORDER BY score asc");
+			ResultSet rs = stat.executeQuery("select * from partidas where status = 1 ORDER BY score asc");
 
 			while (rs.next()) {
 				final partida obj = new partida();

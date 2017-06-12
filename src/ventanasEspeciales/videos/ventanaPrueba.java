@@ -2,6 +2,7 @@ package ventanasEspeciales.videos;
 
 import java.awt.EventQueue;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import ventanas.ventanaPrincipal;
@@ -39,6 +40,7 @@ public class ventanaPrueba {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setIconImage(new ImageIcon(getClass().getResource("/archivos/imagenes/SpaceAttack.png")).getImage());
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}

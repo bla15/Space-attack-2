@@ -56,6 +56,7 @@ public class ventanaGuardado implements KeyListener, ActionListener{
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setIconImage(new ImageIcon(getClass().getResource("/archivos/imagenes/SpaceAttack.png")).getImage());
 		frame.setSize(750,500);
 		frame.setLocationRelativeTo(null);
 		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

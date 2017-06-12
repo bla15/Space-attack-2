@@ -1,7 +1,7 @@
-/ventanas/
-/logicaNegocio/
-/gestorDeNegocio/
 /BD/
-/ventanasEspeciales/
+/ventanas/
+/gestorDeNegocio/
+/logicaNegocio/
+/logicaVentanas/
 /archivos/
-/imagenes/
+/ventanasEspeciales/

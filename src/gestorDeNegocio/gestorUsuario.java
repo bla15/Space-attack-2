@@ -2,8 +2,6 @@ package gestorDeNegocio;
 
 import java.util.HashSet;
 
-import com.sun.prism.Texture.Usage;
-
 import contraseñas.conversorContraseñas;
 import BD.GestorBDusuarios;
 

@@ -85,6 +85,7 @@ public class ventanaCargaPartida implements KeyListener, ActionListener{
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
+		frame.setIconImage(new ImageIcon(getClass().getResource("/archivos/imagenes/SpaceAttack.png")).getImage());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setUndecorated(true);
@@ -257,7 +258,7 @@ public class ventanaCargaPartida implements KeyListener, ActionListener{
 			//cargamos los datos en la variable glabal de partida
 			ventanaCampaña.miPartida=P;
 			//creamos la partida
-			ventanaMenu.ln = new logicaNivel(planeta,vida,true);
+			ventanaMenu.ln = new logicaNivel(planeta,vida);
 			
 			window.frame.dispose();
 			
